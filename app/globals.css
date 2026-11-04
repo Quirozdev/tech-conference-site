@@ -1,26 +1,118 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Colors */
+  --color-neutral-900: #00151d;
+  --color-neutral-800: #001a24;
+  --color-neutral-600: #33444a;
+  --color-neutral-500: #49616a;
+  --color-neutral-200: #c2c5c2;
+  --color-neutral-100: #fcefe8;
+
+  --color-green-200: #d1ff66;
+
+  --color-yellow-100: #ffe6ba;
+
+  --color-red-300: #ff8080;
+  --color-red-100: #fec9c3;
+
+  --color-cyan-100: #b5e9fc;
+
+  --color-purple-100: #ccc4fd;
+
+  --color-blue-100: #bbd8ff;
+
+  /* Typography */
+  --text-preset-1: 5rem;
+  --text-preset-1--line-height: 100%;
+  --text-preset-1--letter-spacing: -2px;
+  --text-preset-1--font-weight: 700;
+
+  --text-preset-2: 1.5rem;
+  --text-preset-2--line-height: 110%;
+  --text-preset-2--letter-spacing: 0px;
+  --text-preset-2--font-weight: 700;
+
+  --text-preset-3: 1.5rem;
+  --text-preset-3-line-height: 130%;
+  --text-preset-3-letter-spacing: 0px;
+  --text-preset-3-font-weight: 600;
+
+  --text-preset-4: 1.25rem;
+  --text-preset-4-line-height: 140%;
+  --text-preset-4-letter-spacing: 0px;
+  --text-preset-4-font-weight: 700;
+
+  --text-preset-5: 1rem;
+  --text-preset-5-line-height: 140%;
+  --text-preset-5-letter-spacing: 0px;
+  --text-preset-5-font-weight: 400;
+
+  --text-preset-6: 0.875rem;
+  --text-preset-6-line-height: 140%;
+  --text-preset-6-letter-spacing: 0px;
+  --text-preset-6-font-weight: 400;
+
+  --text-preset-7: 0.75rem;
+  --text-preset-7-line-height: 140%;
+  --text-preset-7-letter-spacing: 0.5px;
+  --text-preset-7-font-weight: 400;
+
+  /* Spacing */
+  --spacing-0: 0px;
+  --spacing-025: 2px;
+  --spacing-050: 4px;
+  --spacing-075: 6px;
+  --spacing-100: 8px;
+  --spacing-125: 10px;
+  --spacing-150: 12px;
+  --spacing-200: 16px;
+  --spacing-250: 20px;
+  --spacing-300: 24px;
+  --spacing-400: 32px;
+  --spacing-500: 40px;
+  --spacing-600: 48px;
+  --spacing-800: 64px;
+  --spacing-1000: 80px;
+  --spacing-1200: 96px;
+  --spacing-1400: 112px;
+  --spacing-1600: 128px;
+  --spacing-1800: 140px;
+
+  /* Radius */
+  --radius-0: 0px;
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-10: 10px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-full: 999px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-jetbrains-mono: var(--font-jetbrains-mono);
+  --font-chakra-petch: var(--font-chakra-petch);
 }
 
-@media (prefers-color-scheme: dark) {
+/* Tablet */
+@media (width >= theme(--breakpoint-md)) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --text-preset-2: 1.75rem;
+    --text-preset-2--line-height: 110%;
+    --text-preset-2--letter-spacing: 0px;
+    --text-preset-2--font-weight: 700;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Desktop */
+@media (width >= theme(--breakpoint-lg)) {
+  :root {
+    --text-preset-2: 2rem;
+    --text-preset-2--line-height: 120%;
+    --text-preset-2--letter-spacing: 0px;
+    --text-preset-2--font-weight: 700;
+  }
 }
