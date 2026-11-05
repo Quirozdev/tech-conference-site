@@ -1,4 +1,6 @@
 import Button from "@/app/_components/button";
+import SectionTitle from "@/app/_components/section-title";
+import Speaker from "@/app/_components/speaker";
 import Track from "@/app/_components/track";
 import Image from "next/image";
 
@@ -72,9 +74,7 @@ export default function Home() {
         </article>
       </section>
       <section className="flex flex-col gap-y-5 xl:gap-y-6">
-        <h2 className="text-preset-6 font-extrabold text-green-200 uppercase">
-          {"// TRACKS"}
-        </h2>
+        <SectionTitle title="// TRACKS" />
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 xl:gap-x-4">
           <Track
             title="frontend"
@@ -99,6 +99,59 @@ export default function Home() {
             upperText="Level up your"
             lowerText="developer workflow"
             trackTitleClassName="text-purple-100"
+          />
+        </div>
+      </section>
+      <section className="flex flex-col gap-y-6">
+        <SectionTitle title="// FEATURED_SPEAKERS" />
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 xl:gap-6">
+          <Speaker
+            id="sp_0"
+            name="Elena Vasquez"
+            role="Principal Frontend Engineer"
+            company="Bytecraft"
+            avatar="/images/avatar-elena-vasquez.webp"
+            bio="Elena has spent the last decade pushing the boundaries of in-browser development environments. She led the browser-native IDE initiative at Bytecraft and is a frequent contributor to the TC39 process. Her work focuses on making the web platform a first-class development target."
+            talk={{
+              id: "tk_0",
+              title: "The Next Frontier of Web Development",
+            }}
+          />
+          <Speaker
+            id="sp_0"
+            name="Elena Vasquez"
+            role="Principal Frontend Engineer"
+            company="Bytecraft"
+            avatar="/images/avatar-elena-vasquez.webp"
+            bio="Elena has spent the last decade pushing the boundaries of in-browser development environments. She led the browser-native IDE initiative at Bytecraft and is a frequent contributor to the TC39 process. Her work focuses on making the web platform a first-class development target."
+            talk={{
+              id: "tk_0",
+              title: "The Next Frontier of Web Development",
+            }}
+          />
+          <Speaker
+            id="sp_0"
+            name="Elena Vasquez"
+            role="Principal Frontend Engineer"
+            company="Bytecraft"
+            avatar="/images/avatar-elena-vasquez.webp"
+            bio="Elena has spent the last decade pushing the boundaries of in-browser development environments. She led the browser-native IDE initiative at Bytecraft and is a frequent contributor to the TC39 process. Her work focuses on making the web platform a first-class development target."
+            talk={{
+              id: "tk_0",
+              title: "The Next Frontier of Web Development",
+            }}
+          />
+          <Speaker
+            id="sp_0"
+            name="Elena Vasquez"
+            role="Principal Frontend Engineer"
+            company="Bytecraft"
+            avatar="/images/avatar-elena-vasquez.webp"
+            bio="Elena has spent the last decade pushing the boundaries of in-browser development environments. She led the browser-native IDE initiative at Bytecraft and is a frequent contributor to the TC39 process. Her work focuses on making the web platform a first-class development target."
+            talk={{
+              id: "tk_0",
+              title: "The Next Frontier of Web Development",
+            }}
           />
         </div>
       </section>
