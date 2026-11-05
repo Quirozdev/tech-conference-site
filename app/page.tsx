@@ -1,5 +1,6 @@
+import Button from "@/app/_components/button";
+import Track from "@/app/_components/track";
 import Image from "next/image";
-import Button from "./_components/button";
 
 export default function Home() {
   return (
@@ -69,6 +70,37 @@ export default function Home() {
             <div className="absolute top-8 -right-8 hidden h-31 w-31 rounded-full border-2 border-black/8 md:block xl:hidden"></div>
           </div>
         </article>
+      </section>
+      <section className="flex flex-col gap-y-5 xl:gap-y-6">
+        <h2 className="text-preset-6 font-extrabold text-green-200 uppercase">
+          {"// TRACKS"}
+        </h2>
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 xl:gap-x-4">
+          <Track
+            title="frontend"
+            upperText="Building modern interfaces"
+            lowerText="for the web"
+            trackTitleClassName="text-yellow-100"
+          />
+          <Track
+            title="performance"
+            upperText="make every"
+            lowerText="millisecond count"
+            trackTitleClassName="text-red-100"
+          />
+          <Track
+            title="accessibility"
+            upperText="Building inclusive"
+            lowerText="experiences for everyone"
+            trackTitleClassName="text-blue-100"
+          />
+          <Track
+            title="tooling"
+            upperText="Level up your"
+            lowerText="developer workflow"
+            trackTitleClassName="text-purple-100"
+          />
+        </div>
       </section>
     </div>
   );
