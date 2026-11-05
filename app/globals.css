@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@theme inline {
+  --font-jetbrains-mono: var(--font-jetbrains-mono);
+  --font-chakra-petch: var(--font-chakra-petch);
+  --default-font-family: var(--font-jetbrains-mono);
+}
+
 @theme {
   /* Colors */
   --color-neutral-900: #00151d;
@@ -23,6 +29,7 @@
   --color-blue-100: #bbd8ff;
 
   /* Typography */
+
   --text-preset-1: 5rem;
   --text-preset-1--line-height: 100%;
   --text-preset-1--letter-spacing: -2px;
@@ -90,11 +97,6 @@
   --radius-20: 20px;
   --radius-24: 24px;
   --radius-full: 999px;
-}
-
-@theme inline {
-  --font-jetbrains-mono: var(--font-jetbrains-mono);
-  --font-chakra-petch: var(--font-chakra-petch);
 }
 
 /* Tablet */
