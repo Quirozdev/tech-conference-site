@@ -30,7 +30,7 @@
 
   /* Typography */
 
-  --text-preset-1: 5rem;
+  --text-preset-1: 2.375rem;
   --text-preset-1--line-height: 100%;
   --text-preset-1--letter-spacing: -2px;
   --text-preset-1--font-weight: 700;
@@ -102,6 +102,11 @@
 /* Tablet */
 @media (width >= theme(--breakpoint-md)) {
   :root {
+    --text-preset-1: 5rem;
+    --text-preset-1--line-height: 100%;
+    --text-preset-1--letter-spacing: -2px;
+    --text-preset-1--font-weight: 700;
+
     --text-preset-2: 1.75rem;
     --text-preset-2--line-height: 110%;
     --text-preset-2--letter-spacing: 0px;
@@ -110,7 +115,7 @@
 }
 
 /* Desktop */
-@media (width >= theme(--breakpoint-lg)) {
+@media (width >= theme(--breakpoint-xl)) {
   :root {
     --text-preset-2: 2rem;
     --text-preset-2--line-height: 120%;
