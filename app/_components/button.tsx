@@ -17,7 +17,7 @@ export default function Button({ label, variant, className, ...props }: Props) {
   return (
     <button
       className={cn(
-        "text-preset-5 flex cursor-pointer items-center justify-center gap-x-3 border px-6 py-4 font-bold uppercase",
+        "text-preset-5 flex cursor-pointer items-center justify-center gap-x-3 border px-6 py-4 font-bold uppercase outline-none",
         variantClasses[variant],
         className,
       )}
