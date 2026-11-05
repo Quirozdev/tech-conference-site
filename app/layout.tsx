@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Chakra_Petch, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Image from "next/image";
-import Link from "next/link";
 import Header from "./_components/header";
 
 const jetbrainsMono = JetBrains_Mono({

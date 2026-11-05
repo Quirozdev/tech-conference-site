@@ -17,12 +17,15 @@ export default function NavBar() {
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.documentElement.classList.add("overflow-y-hidden");
+      document.documentElement.classList.add("scrollbar-gutter-stable");
     } else {
       document.documentElement.classList.remove("overflow-y-hidden");
+      document.documentElement.classList.remove("scrollbar-gutter-stable");
     }
 
     return () => {
       document.documentElement.classList.remove("overflow-y-hidden");
+      document.documentElement.classList.remove("scrollbar-gutter-stable");
     };
   }, [isMobileMenuOpen]);
 
@@ -56,7 +59,7 @@ export default function NavBar() {
         aria-label="Mobile navigation"
         inert={!isMobileMenuOpen}
         className={cn(
-          "absolute top-[calc(100%+1px)] left-0 -z-10 w-full bg-neutral-900 py-3 opacity-0 transition-opacity duration-500 ease-in-out md:hidden",
+          "absolute top-[calc(100%+1px)] left-0 z-10 w-full bg-neutral-900 py-3 opacity-0 transition-opacity duration-500 ease-in-out md:hidden",
           isMobileMenuOpen && "z-10 min-h-dvh opacity-100",
         )}
       >
