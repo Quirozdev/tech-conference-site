@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useId, useRef, useState } from "react";
 import { cn } from "../_lib/cn";
 import Menu from "./menu";
 import NavList from "./nav-list";
 import { useKeyDown } from "../_hooks/use-key-down";
+import { useRemoveVerticalScrolling } from "@/app/_hooks/use-remove-vertical-scrolling";
 
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,20 +15,7 @@ export default function NavBar() {
     setIsMobileMenuOpen(false);
   }, []);
 
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.documentElement.classList.add("overflow-y-hidden");
-      document.documentElement.classList.add("scrollbar-gutter-stable");
-    } else {
-      document.documentElement.classList.remove("overflow-y-hidden");
-      document.documentElement.classList.remove("scrollbar-gutter-stable");
-    }
-
-    return () => {
-      document.documentElement.classList.remove("overflow-y-hidden");
-      document.documentElement.classList.remove("scrollbar-gutter-stable");
-    };
-  }, [isMobileMenuOpen]);
+  useRemoveVerticalScrolling({ shouldRemove: isMobileMenuOpen });
 
   useKeyDown({
     key: "Escape",
