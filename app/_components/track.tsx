@@ -2,18 +2,25 @@ import { cn } from "@/app/_lib/cn";
 import Link from "next/link";
 
 interface Props {
-  title: string;
-  upperText: string;
-  lowerText: string;
-  trackTitleClassName?: string;
+  id: string;
+  name: string;
+  description: string;
+  color: string;
 }
 
-export default function Track({
-  title,
-  upperText,
-  lowerText,
-  trackTitleClassName,
-}: Props) {
+export default function Track({ name, description, color }: Props) {
+  function getSplittedDescription() {
+    const splittedDescription = description.split(" ");
+    const wordsLength = splittedDescription.length;
+    const half = Math.ceil(wordsLength / 2);
+    return [
+      splittedDescription.slice(0, half).join(" "),
+      splittedDescription.slice(half, wordsLength).join(" "),
+    ];
+  }
+
+  const [descriptionFirstRow, descriptionSecondRow] = getSplittedDescription();
+
   return (
     <Link
       href="#"
@@ -21,15 +28,17 @@ export default function Track({
     >
       <p
         className={cn(
-          "text-preset-3 font-chakra-petch text-neutral-100",
-          trackTitleClassName,
+          "text-preset-3 font-chakra-petch text-neutral-100 lowercase",
         )}
+        style={{
+          color: color,
+        }}
       >
-        {title}
+        {name}
       </p>
       <p className="text-preset-6 flex flex-col font-medium text-neutral-200 uppercase">
-        <span>{upperText}</span>
-        <span>{lowerText}</span>
+        <span>{descriptionFirstRow}</span>
+        <span>{descriptionSecondRow}</span>
       </p>
     </Link>
   );

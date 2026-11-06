@@ -12,6 +12,10 @@ export default function Home() {
     return { ...speaker, talk: { ...talk, track } };
   });
 
+  const tracksWithoutKeynoteOne = data.tracks.filter(
+    (track) => track.name !== "Keynote",
+  );
+
   return (
     <div className="flex flex-col gap-y-11.25">
       <section className="flex flex-col gap-y-6 xl:flex-row xl:gap-x-8">
@@ -83,30 +87,9 @@ export default function Home() {
       <section className="flex flex-col gap-y-5 xl:gap-y-6">
         <SectionTitle title="// TRACKS" />
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 xl:gap-x-4">
-          <Track
-            title="frontend"
-            upperText="Building modern interfaces"
-            lowerText="for the web"
-            trackTitleClassName="text-yellow-100"
-          />
-          <Track
-            title="performance"
-            upperText="make every"
-            lowerText="millisecond count"
-            trackTitleClassName="text-red-100"
-          />
-          <Track
-            title="accessibility"
-            upperText="Building inclusive"
-            lowerText="experiences for everyone"
-            trackTitleClassName="text-blue-100"
-          />
-          <Track
-            title="tooling"
-            upperText="Level up your"
-            lowerText="developer workflow"
-            trackTitleClassName="text-purple-100"
-          />
+          {tracksWithoutKeynoteOne.map((track) => {
+            return <Track key={track.id} {...track} />;
+          })}
         </div>
       </section>
       <section className="flex flex-col gap-y-6">
