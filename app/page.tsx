@@ -99,6 +99,11 @@ export default function Home() {
             return <Speaker key={speaker.id} {...speaker} />;
           })}
         </div>
+        <Button
+          variant="primary"
+          label="View all speakers"
+          className="mx-auto mt-6 w-fit"
+        />
       </section>
     </div>
   );
