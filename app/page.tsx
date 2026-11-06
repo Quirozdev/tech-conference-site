@@ -1,4 +1,5 @@
 import Button from "@/app/_components/button";
+import Schedule from "@/app/_components/schedule";
 import SectionTitle from "@/app/_components/section-title";
 import Speaker from "@/app/_components/speaker";
 import Track from "@/app/_components/track";
@@ -15,6 +16,14 @@ export default function Home() {
   const tracksWithoutKeynoteOne = data.tracks.filter(
     (track) => track.name !== "Keynote",
   );
+
+  const latestTalks = data.talks.slice(-5, -1).map((talk) => {
+    const speaker = data.speakers.find(
+      (speaker) => speaker.id === talk.speakerId,
+    )!;
+    const track = data.tracks.find((track) => track.id === talk.trackId)!;
+    return { ...talk, speaker, track };
+  });
 
   return (
     <div className="flex flex-col gap-y-11.25">
@@ -102,6 +111,21 @@ export default function Home() {
         <Button
           variant="primary"
           label="View all speakers"
+          className="mx-auto mt-6 w-fit"
+        />
+      </section>
+      <section className="flex flex-col gap-y-6">
+        <SectionTitle title="// SCHEDULE_HIGHLIGHTS" />
+        <div className="flex flex-col gap-y-4">
+          {latestTalks.map((talk) => {
+            return (
+              <Schedule includeDetailsSection={true} key={talk.id} {...talk} />
+            );
+          })}
+        </div>
+        <Button
+          variant="primary"
+          label="View full schedule"
           className="mx-auto mt-6 w-fit"
         />
       </section>

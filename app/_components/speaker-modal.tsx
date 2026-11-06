@@ -18,8 +18,11 @@ interface Props {
   talk: {
     id: string;
     title: string;
+    day: number;
     startTime: string;
     endTime: string;
+    location: string;
+    description: string;
     track: {
       id: string;
       name: string;
@@ -107,7 +110,7 @@ export default function SpeakerModal(props: Props) {
             >
               {props.name}
             </p>
-            <p className="text-preset-6 flex flex-col font-medium text-neutral-200 uppercase">
+            <p className="text-preset-6 flex flex-col font-medium text-neutral-200 uppercase md:flex-row md:items-center">
               <span>{props.role} @</span>
               <span>{props.company}</span>
             </p>
@@ -117,7 +120,27 @@ export default function SpeakerModal(props: Props) {
         <p className="text-preset-6 text-neutral-200">{props.bio}</p>
         <Separator />
         <SectionTitle title="// TALK" />
-        <Schedule {...props} />
+        <Schedule
+          includeDetailsSection={false}
+          id={props.talk.id}
+          title={props.talk.title}
+          day={props.talk.day}
+          startTime={props.talk.startTime}
+          endTime={props.talk.endTime}
+          location={props.talk.location}
+          description={props.talk.description}
+          speaker={{
+            id: props.id,
+            name: props.name,
+            role: props.role,
+            company: props.company,
+            avatar: props.avatar,
+            bio: props.bio,
+          }}
+          track={{
+            ...props.talk.track,
+          }}
+        />
       </dialog>
     )
   );

@@ -15,8 +15,11 @@ interface Props {
   talk: {
     id: string;
     title: string;
+    day: number;
     startTime: string;
     endTime: string;
+    location: string;
+    description: string;
     track: {
       id: string;
       name: string;
