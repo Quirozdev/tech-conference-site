@@ -17,7 +17,7 @@ export default function Track({
   return (
     <Link
       href="#"
-      className="flex flex-col gap-y-1.5 border border-neutral-100 bg-neutral-900 px-5 py-4 shadow-[2px_2px_0_0_var(--color-neutral-100)] hover:border-green-200 hover:shadow-[2px_2px_0_0_var(--color-green-200)] focus:border-dashed focus:border-green-200 focus:shadow-[2px_2px_0_0_var(--color-green-200)]"
+      className="flex flex-col gap-y-1.5 border border-neutral-100 bg-neutral-900 px-5 py-4 shadow-[2px_2px_0_0_var(--color-neutral-100)] outline-none hover:border-green-200 hover:shadow-[2px_2px_0_0_var(--color-green-200)] focus:border-dashed focus:border-green-200 focus:shadow-[2px_2px_0_0_var(--color-green-200)]"
     >
       <p
         className={cn(
