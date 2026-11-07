@@ -1,8 +1,29 @@
+import { data } from "@/app/data/data";
 import BackToTopButton from "@/shared/components/footer/back-to-top-button";
 import Logo from "@/shared/components/logo";
+import {
+  extractDateComponentsFromIsoStringDateWithoutTime,
+  MONTHS,
+} from "@/shared/utils/dates";
 import Link from "next/link";
 
 export default function Footer() {
+  const {
+    day: startDateDay,
+    month: startDateMonth,
+    year: startDateYear,
+  } = extractDateComponentsFromIsoStringDateWithoutTime(
+    data.conference.startDate,
+  );
+
+  const {
+    day: endDateDay,
+    month: endDateMonth,
+    year: endDateYear,
+  } = extractDateComponentsFromIsoStringDateWithoutTime(
+    data.conference.endDate,
+  );
+
   return (
     <footer className="flex flex-col gap-y-8 border-t border-neutral-600 pt-8 md:gap-y-10 md:pt-10">
       <div className="flex flex-col gap-5 md:gap-8 xl:flex-row xl:justify-between">
@@ -55,9 +76,20 @@ export default function Footer() {
             </h3>
             <div className="flex flex-col gap-y-3">
               <p className="text-preset-6 flex flex-col text-neutral-200">
-                <span>Pier 70</span>
-                <span>San Francisco, CA</span>
-                <span>Nov 15–17, 2026</span>
+                <span>{data.conference.location.venue}</span>
+                <span>
+                  {data.conference.location.city},{" "}
+                  {data.conference.location.state}
+                </span>
+                <span>
+                  {startDateMonth === endDateMonth
+                    ? MONTHS[startDateMonth]
+                    : `${MONTHS[startDateMonth]}-${MONTHS[endDateMonth]}`}{" "}
+                  {startDateDay}–{endDateDay},{" "}
+                  {startDateYear === endDateYear
+                    ? endDateYear
+                    : `${startDateYear}-${endDateYear}`}
+                </span>
               </p>
             </div>
           </div>
