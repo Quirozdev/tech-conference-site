@@ -19,3 +19,35 @@ export function extractDateComponentsFromIsoStringDateWithoutTime(
   const [year, month, day] = date.split("-");
   return { year: Number(year), month: Number(month) - 1, day: Number(day) };
 }
+
+export function getLabelBetweenTwoIsoStringDates(
+  startDate: string,
+  endDate: string,
+) {
+  const {
+    day: startDateDay,
+    month: startDateMonth,
+    year: startDateYear,
+  } = extractDateComponentsFromIsoStringDateWithoutTime(startDate);
+
+  const {
+    day: endDateDay,
+    month: endDateMonth,
+    year: endDateYear,
+  } = extractDateComponentsFromIsoStringDateWithoutTime(endDate);
+
+  const monthLabel =
+    startDateMonth === endDateMonth
+      ? MONTHS[startDateMonth]
+      : `${MONTHS[startDateMonth]}-${MONTHS[endDateMonth]}`;
+
+  const dayLabel =
+    startDateDay === endDateDay ? endDateDay : `${startDateDay}-${endDateDay}`;
+
+  const yearLabel =
+    startDateYear === endDateYear
+      ? endDateYear
+      : `${startDateYear}-${endDateYear}`;
+
+  return `${monthLabel} ${dayLabel}, ${yearLabel}`;
+}

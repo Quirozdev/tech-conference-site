@@ -1,26 +1,12 @@
-import { data } from "@/app/data/data";
+import { data } from "@/shared/data/data";
 import BackToTopButton from "@/shared/components/footer/back-to-top-button";
 import Logo from "@/shared/components/logo";
-import {
-  extractDateComponentsFromIsoStringDateWithoutTime,
-  MONTHS,
-} from "@/shared/utils/dates";
+import { getLabelBetweenTwoIsoStringDates } from "@/shared/utils/dates";
 import Link from "next/link";
 
 export default function Footer() {
-  const {
-    day: startDateDay,
-    month: startDateMonth,
-    year: startDateYear,
-  } = extractDateComponentsFromIsoStringDateWithoutTime(
+  const conferenceDatesLabel = getLabelBetweenTwoIsoStringDates(
     data.conference.startDate,
-  );
-
-  const {
-    day: endDateDay,
-    month: endDateMonth,
-    year: endDateYear,
-  } = extractDateComponentsFromIsoStringDateWithoutTime(
     data.conference.endDate,
   );
 
@@ -81,15 +67,7 @@ export default function Footer() {
                   {data.conference.location.city},{" "}
                   {data.conference.location.state}
                 </span>
-                <span>
-                  {startDateMonth === endDateMonth
-                    ? MONTHS[startDateMonth]
-                    : `${MONTHS[startDateMonth]}-${MONTHS[endDateMonth]}`}{" "}
-                  {startDateDay}–{endDateDay},{" "}
-                  {startDateYear === endDateYear
-                    ? endDateYear
-                    : `${startDateYear}-${endDateYear}`}
-                </span>
+                <span>{conferenceDatesLabel}</span>
               </p>
             </div>
           </div>

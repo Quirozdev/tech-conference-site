@@ -2,11 +2,17 @@ import Schedule from "@/features/schedule/components/schedule";
 import SectionTitle from "@/shared/components/section-title";
 import Speaker from "@/features/speakers/components/speaker";
 import Track from "@/features/tracks/components/track";
-import { data } from "@/app/data/data";
+import { data } from "@/shared/data/data";
 import Image from "next/image";
 import Button from "@/shared/components/button";
+import { getLabelBetweenTwoIsoStringDates } from "@/shared/utils/dates";
 
 export default function Home() {
+  const conferenceDatesLabel = getLabelBetweenTwoIsoStringDates(
+    data.conference.startDate,
+    data.conference.endDate,
+  );
+
   const speakersWithTheirTalkAndTrack = data.speakers.map((speaker) => {
     const talk = data.talks.find((talk) => talk.speakerId === speaker.id)!;
     const track = data.tracks.find((track) => track.id === talk.trackId)!;
@@ -30,7 +36,7 @@ export default function Home() {
       <section className="flex flex-col gap-y-6 xl:flex-row xl:gap-x-8">
         <article className="relative flex min-h-55 flex-col justify-between bg-neutral-100 p-4 md:max-h-[400px] md:min-h-90 md:px-6 md:py-5 xl:flex-1 xl:px-8">
           <h1 className="text-preset-1 font-chakra-petch text-neutral-900">
-            where code meets the machine_
+            {data.conference.tagline}
           </h1>
           <Image
             src="/images/bg-horizon-text.svg"
@@ -41,10 +47,11 @@ export default function Home() {
           />
           <div className="flex items-center justify-between border-t-2 border-neutral-900 pt-4">
             <p className="text-preset-6 text-neutral-900 uppercase">
-              NOV 15-17, 2026
+              {conferenceDatesLabel}
             </p>
             <p className="text-preset-6 text-neutral-900 uppercase">
-              PIER 70, SF
+              {data.conference.location.venue},{" "}
+              {data.conference.location.cityAbbreviation}
             </p>
           </div>
         </article>
