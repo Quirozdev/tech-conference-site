@@ -2,13 +2,17 @@ import { data } from "@/shared/data/data";
 import BackToTopButton from "@/shared/components/footer/back-to-top-button";
 import Logo from "@/shared/components/logo";
 import { getLabelBetweenTwoIsoStringDates } from "@/shared/utils/dates";
-import Link from "next/link";
 import { NAV_LINKS } from "@/core/config/navigation.config";
+import FooterLink from "@/shared/components/footer/footer-link";
 
 export default function Footer() {
   const conferenceDatesLabel = getLabelBetweenTwoIsoStringDates(
     data.conference.startDate,
     data.conference.endDate,
+  );
+
+  const tracksWithoutKeynoteOne = data.tracks.filter(
+    (track) => track.name !== "Keynote",
   );
 
   return (
@@ -29,13 +33,11 @@ export default function Footer() {
             <div className="flex flex-col gap-y-3">
               {NAV_LINKS.map((navLink) => {
                 return (
-                  <Link
+                  <FooterLink
                     key={navLink.href}
                     href={navLink.href}
-                    className="text-preset-6 text-neutral-200"
-                  >
-                    {navLink.label}
-                  </Link>
+                    label={navLink.label}
+                  />
                 );
               })}
             </div>
@@ -45,18 +47,15 @@ export default function Footer() {
               {"// Tracks "}
             </h3>
             <div className="flex flex-col gap-y-3">
-              <Link href="#" className="text-preset-6 text-neutral-200">
-                Frontend
-              </Link>
-              <Link href="#" className="text-preset-6 text-neutral-200">
-                Performance
-              </Link>
-              <Link href="#" className="text-preset-6 text-neutral-200">
-                Accesibility
-              </Link>
-              <Link href="#" className="text-preset-6 text-neutral-200">
-                Tooling
-              </Link>
+              {tracksWithoutKeynoteOne.map((track) => {
+                return (
+                  <FooterLink
+                    key={track.id}
+                    href={`/schedule?track=${track.id}`}
+                    label={track.name}
+                  />
+                );
+              })}
             </div>
           </div>
           <div className="flex flex-col gap-y-4">
