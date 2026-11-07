@@ -51,8 +51,8 @@ export default function NavBar() {
         aria-label="Mobile navigation"
         inert={!isMobileMenuOpen}
         className={cn(
-          "absolute top-[calc(100%+1px)] left-0 z-10 w-full bg-neutral-900 py-3 opacity-0 transition-opacity duration-500 ease-in-out md:hidden",
-          isMobileMenuOpen && "z-10 min-h-dvh opacity-100",
+          "absolute top-[calc(100%+1px)] left-0 z-50 w-full bg-neutral-900 py-3 opacity-0 transition-opacity duration-500 ease-in-out md:hidden",
+          isMobileMenuOpen && "z-50 min-h-dvh opacity-100",
         )}
       >
         <NavList onNavigation={hideMobileMenu} className="flex md:hidden" />
