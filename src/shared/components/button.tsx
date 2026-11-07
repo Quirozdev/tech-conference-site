@@ -1,5 +1,5 @@
-import ArrowRightIcon from "../_icons/arrow-right-icon";
-import { cn } from "../_lib/cn";
+import ArrowRightIcon from "@/shared/icons/arrow-right-icon";
+import { cn } from "@/shared/utils/cn";
 
 interface Props extends React.ComponentPropsWithRef<"button"> {
   label: string;

@@ -1,8 +1,8 @@
 "use client";
 
-import BookmarkButton from "@/app/_components/bookmark-button";
-import Separator from "@/app/_components/separator";
-import { cn } from "@/app/_lib/cn";
+import BookmarkButton from "@/features/schedule/components/bookmark-button";
+import Separator from "@/shared/components/separator";
+import { cn } from "@/shared/utils/cn";
 import Image from "next/image";
 import { useState } from "react";
 

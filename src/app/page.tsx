@@ -1,10 +1,10 @@
-import Button from "@/app/_components/button";
-import Schedule from "@/app/_components/schedule";
-import SectionTitle from "@/app/_components/section-title";
-import Speaker from "@/app/_components/speaker";
-import Track from "@/app/_components/track";
+import Schedule from "@/features/schedule/components/schedule";
+import SectionTitle from "@/shared/components/section-title";
+import Speaker from "@/features/speakers/components/speaker";
+import Track from "@/features/tracks/components/track";
 import { data } from "@/app/data/data";
 import Image from "next/image";
+import Button from "@/shared/components/button";
 
 export default function Home() {
   const speakersWithTheirTalkAndTrack = data.speakers.map((speaker) => {

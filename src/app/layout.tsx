@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Chakra_Petch, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "./_components/header";
-import Footer from "@/app/_components/footer";
+import Header from "@/shared/components/header/header";
+import Footer from "@/shared/components/footer/footer";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",

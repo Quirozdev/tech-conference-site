@@ -1,5 +1,5 @@
-import BackToTopButton from "@/app/_components/back-to-top-button";
-import Logo from "@/app/_components/logo";
+import BackToTopButton from "@/shared/components/footer/back-to-top-button";
+import Logo from "@/shared/components/logo";
 import Link from "next/link";
 
 export default function Footer() {

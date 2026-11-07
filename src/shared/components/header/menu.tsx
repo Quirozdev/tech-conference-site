@@ -1,4 +1,4 @@
-import SmallButton from "@/app/_components/small-button";
+import SmallButton from "@/shared/components/small-button";
 import Image from "next/image";
 
 interface Props extends React.ComponentPropsWithRef<"button"> {

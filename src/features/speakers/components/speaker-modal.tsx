@@ -1,8 +1,8 @@
-import Schedule from "@/app/_components/schedule";
-import SectionTitle from "@/app/_components/section-title";
-import Separator from "@/app/_components/separator";
-import SmallButton from "@/app/_components/small-button";
-import { useRemoveVerticalScrolling } from "@/app/_hooks/use-remove-vertical-scrolling";
+import SectionTitle from "@/shared/components/section-title";
+import Separator from "@/shared/components/separator";
+import SmallButton from "@/shared/components/small-button";
+import { useRemoveVerticalScrolling } from "@/shared/hooks/use-remove-vertical-scrolling";
+import Schedule from "@/features/schedule/components/schedule";
 import Image from "next/image";
 import { useEffect, useId, useRef } from "react";
 

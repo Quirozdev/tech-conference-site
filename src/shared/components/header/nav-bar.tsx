@@ -1,11 +1,11 @@
 "use client";
 
+import Menu from "@/shared/components/header/menu";
+import NavList from "@/shared/components/header/nav-list";
+import { useKeyDown } from "@/shared/hooks/use-key-down";
+import { useRemoveVerticalScrolling } from "@/shared/hooks/use-remove-vertical-scrolling";
+import { cn } from "@/shared/utils/cn";
 import { useCallback, useId, useRef, useState } from "react";
-import { cn } from "../_lib/cn";
-import Menu from "./menu";
-import NavList from "./nav-list";
-import { useKeyDown } from "../_hooks/use-key-down";
-import { useRemoveVerticalScrolling } from "@/app/_hooks/use-remove-vertical-scrolling";
 
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

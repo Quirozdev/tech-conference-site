@@ -1,5 +1,5 @@
-import NavBar from "./nav-bar";
-import Logo from "@/app/_components/logo";
+import Logo from "@/shared/components/logo";
+import NavBar from "@/shared/components/header/nav-bar";
 
 export default function Header() {
   return (

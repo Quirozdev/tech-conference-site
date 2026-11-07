@@ -1,7 +1,7 @@
 "use client";
 
-import Separator from "@/app/_components/separator";
-import SpeakerModal from "@/app/_components/speaker-modal";
+import Separator from "@/shared/components/separator";
+import SpeakerModal from "@/features/speakers/components/speaker-modal";
 import Image from "next/image";
 import { useState } from "react";
 

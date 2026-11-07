@@ -1,5 +1,5 @@
-import { cn } from "../_lib/cn";
-import NavButton from "./nav-button";
+import NavButton from "@/shared/components/header/nav-button";
+import { cn } from "@/shared/utils/cn";
 
 interface Props extends React.ComponentProps<"ul"> {
   onNavigation: () => void;

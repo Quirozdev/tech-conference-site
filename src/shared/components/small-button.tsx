@@ -1,4 +1,4 @@
-import { cn } from "@/app/_lib/cn";
+import { cn } from "@/shared/utils/cn";
 
 type Props = React.ComponentPropsWithRef<"button">;
 
