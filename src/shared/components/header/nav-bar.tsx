@@ -22,8 +22,10 @@ export default function NavBar() {
   useKeyDown({
     key: "Escape",
     onKeyDown: () => {
-      hideMobileMenu();
-      menuButtonRef.current?.focus();
+      if (isMobileMenuOpen) {
+        hideMobileMenu();
+        menuButtonRef.current?.focus();
+      }
     },
   });
 
