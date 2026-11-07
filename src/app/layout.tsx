@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Chakra_Petch, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import Header from "@/shared/components/header/header";
+import Footer from "@/shared/components/footer/footer";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
@@ -23,9 +25,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${jetbrainsMono.variable} ${chakraPetch.variable} h-full antialiased`}
+      className={`${jetbrainsMono.variable} ${chakraPetch.variable} antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="mx-auto flex min-h-screen max-w-360 flex-col bg-neutral-900 px-4 md:px-5 xl:px-10">
+        <Header />
+        <main className="py-8 md:py-10 xl:pb-16">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
