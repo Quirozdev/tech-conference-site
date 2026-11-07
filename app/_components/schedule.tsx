@@ -2,6 +2,7 @@
 
 import BookmarkButton from "@/app/_components/bookmark-button";
 import Separator from "@/app/_components/separator";
+import { cn } from "@/app/_lib/cn";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -62,20 +63,27 @@ export default function Schedule(props: Props) {
               </p>
             </div>
           </div>
-          {isDetailsShown && <Separator className="opacity-10" />}
-          {isDetailsShown && (
-            <p className="text-preset-6 text-neutral-900">
-              {props.description}
-            </p>
-          )}
-          {isDetailsShown && (
-            <p className="text-preset-6 font-medium text-neutral-900 uppercase">
-              Location: {props.location}
-            </p>
-          )}
+          <div
+            className={cn(
+              "-mt-3 grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-in-out",
+              isDetailsShown && "mt-0 grid-rows-[1fr]",
+            )}
+          >
+            <div className="min-h-0 overflow-hidden">
+              <div className="flex flex-col gap-y-4 md:gap-y-3">
+                <Separator className="opacity-10" />
+                <p className="text-preset-6 text-neutral-900">
+                  {props.description}
+                </p>
+                <p className="text-preset-6 font-medium text-neutral-900 uppercase">
+                  Location: {props.location}
+                </p>
+              </div>
+            </div>
+          </div>
           <button
             aria-pressed={isDetailsShown}
-            className="flex cursor-pointer items-center uppercase"
+            className="flex w-fit cursor-pointer items-center uppercase"
             onClick={() => setIsDetailsShown((prev) => !prev)}
           >
             {isDetailsShown ? (
