@@ -1,3 +1,4 @@
+import { NAV_LINKS } from "@/core/config/navigation.config";
 import NavButton from "@/shared/components/header/nav-button";
 import { cn } from "@/shared/utils/cn";
 
@@ -14,23 +15,17 @@ export default function NavList({ onNavigation, className, ...props }: Props) {
       )}
       {...props}
     >
-      <li>
-        <NavButton href="/" label="Home" onNavigation={onNavigation} />
-      </li>
-      <li>
-        <NavButton
-          href="/schedule"
-          label="Schedule"
-          onNavigation={onNavigation}
-        />
-      </li>
-      <li>
-        <NavButton
-          href="/speakers"
-          label="Speakers"
-          onNavigation={onNavigation}
-        />
-      </li>
+      {NAV_LINKS.map((navLink) => {
+        return (
+          <li key={navLink.href}>
+            <NavButton
+              href={navLink.href}
+              label={navLink.label}
+              onNavigation={onNavigation}
+            />
+          </li>
+        );
+      })}
     </ul>
   );
 }

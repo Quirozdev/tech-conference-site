@@ -3,6 +3,7 @@ import BackToTopButton from "@/shared/components/footer/back-to-top-button";
 import Logo from "@/shared/components/logo";
 import { getLabelBetweenTwoIsoStringDates } from "@/shared/utils/dates";
 import Link from "next/link";
+import { NAV_LINKS } from "@/core/config/navigation.config";
 
 export default function Footer() {
   const conferenceDatesLabel = getLabelBetweenTwoIsoStringDates(
@@ -26,15 +27,17 @@ export default function Footer() {
               {"// Navigate"}
             </h3>
             <div className="flex flex-col gap-y-3">
-              <Link href="/" className="text-preset-6 text-neutral-200">
-                Home
-              </Link>
-              <Link href="/schedule" className="text-preset-6 text-neutral-200">
-                Schedule
-              </Link>
-              <Link href="/speakers" className="text-preset-6 text-neutral-200">
-                Speakers
-              </Link>
+              {NAV_LINKS.map((navLink) => {
+                return (
+                  <Link
+                    key={navLink.href}
+                    href={navLink.href}
+                    className="text-preset-6 text-neutral-200"
+                  >
+                    {navLink.label}
+                  </Link>
+                );
+              })}
             </div>
           </div>
           <div className="flex flex-col gap-y-4">
