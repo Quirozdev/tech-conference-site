@@ -5,31 +5,15 @@ import { useRemoveVerticalScrolling } from "@/shared/hooks/use-remove-vertical-s
 import Schedule from "@/features/schedule/components/schedule";
 import Image from "next/image";
 import { useEffect, useId, useRef } from "react";
+import type { Speaker } from "@/features/speakers/types";
+import type { Talk } from "@/features/talks/types";
+import type { Track } from "@/features/tracks/types";
 
-interface Props {
+interface Props extends Speaker {
   isOpen: boolean;
   onClose: () => void;
   id: string;
-  name: string;
-  role: string;
-  company: string;
-  avatar: string;
-  bio: string;
-  talk: {
-    id: string;
-    title: string;
-    day: number;
-    startTime: string;
-    endTime: string;
-    location: string;
-    description: string;
-    track: {
-      id: string;
-      name: string;
-      description: string;
-      color: string;
-    };
-  };
+  talk: Talk & { track: Track };
 }
 
 export default function SpeakerModal(props: Props) {
@@ -129,6 +113,9 @@ export default function SpeakerModal(props: Props) {
           endTime={props.talk.endTime}
           location={props.talk.location}
           description={props.talk.description}
+          highlighted={props.talk.highlighted}
+          speakerId={props.talk.speakerId}
+          trackId={props.talk.trackId}
           speaker={{
             id: props.id,
             name: props.name,
@@ -136,6 +123,7 @@ export default function SpeakerModal(props: Props) {
             company: props.company,
             avatar: props.avatar,
             bio: props.bio,
+            featured: props.featured,
           }}
           track={{
             ...props.talk.track,

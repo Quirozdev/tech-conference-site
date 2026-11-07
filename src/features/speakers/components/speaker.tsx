@@ -4,29 +4,12 @@ import Separator from "@/shared/components/separator";
 import SpeakerModal from "@/features/speakers/components/speaker-modal";
 import Image from "next/image";
 import { useState } from "react";
+import type { Speaker } from "@/features/speakers/types";
+import type { Talk } from "@/features/talks/types";
+import type { Track } from "@/features/tracks/types";
 
-interface Props {
-  id: string;
-  name: string;
-  role: string;
-  company: string;
-  avatar: string;
-  bio: string;
-  talk: {
-    id: string;
-    title: string;
-    day: number;
-    startTime: string;
-    endTime: string;
-    location: string;
-    description: string;
-    track: {
-      id: string;
-      name: string;
-      description: string;
-      color: string;
-    };
-  };
+interface Props extends Speaker {
+  talk: Talk & { track: Track };
 }
 
 export default function Speaker(props: Props) {

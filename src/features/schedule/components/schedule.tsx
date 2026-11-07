@@ -1,34 +1,18 @@
 "use client";
 
 import BookmarkButton from "@/features/schedule/components/bookmark-button";
+import { Speaker } from "@/features/speakers/types";
+import type { Talk } from "@/features/talks/types";
+import { Track } from "@/features/tracks/types";
 import Separator from "@/shared/components/separator";
 import { cn } from "@/shared/utils/cn";
 import Image from "next/image";
 import { useState } from "react";
 
-interface Props {
+interface Props extends Talk {
   includeDetailsSection: boolean;
-  id: string;
-  title: string;
-  day: number;
-  startTime: string;
-  endTime: string;
-  location: string;
-  description: string;
-  speaker: {
-    id: string;
-    name: string;
-    role: string;
-    company: string;
-    avatar: string;
-    bio: string;
-  };
-  track: {
-    id: string;
-    name: string;
-    description: string;
-    color: string;
-  };
+  speaker: Speaker;
+  track: Track;
 }
 
 export default function Schedule(props: Props) {

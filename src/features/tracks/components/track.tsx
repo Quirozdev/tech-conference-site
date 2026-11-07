@@ -1,12 +1,8 @@
+import type { Track } from "@/features/tracks/types";
 import { cn } from "@/shared/utils/cn";
 import Link from "next/link";
 
-interface Props {
-  id: string;
-  name: string;
-  description: string;
-  color: string;
-}
+type Props = Track;
 
 export default function Track({ name, description, color }: Props) {
   function getSplittedDescription() {
