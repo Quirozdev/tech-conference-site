@@ -17,7 +17,10 @@ const chakraPetch = Chakra_Petch({
 });
 
 export const metadata: Metadata = {
-  title: "Tech Conference Site",
+  title: {
+    template: "%s | Tech Conference Site",
+    default: "Tech Conference Site",
+  },
   description: "Site for tech conferences",
 };
 
