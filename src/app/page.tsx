@@ -6,18 +6,22 @@ import { data } from "@/shared/data/data";
 import Image from "next/image";
 import Button from "@/shared/components/button";
 import { getLabelBetweenTwoIsoStringDates } from "@/shared/utils/dates";
+import SpeakerWrapper from "@/features/speakers/components/speaker-wrapper";
+import Link from "next/link";
 
-export default function Home() {
+export default function HomePage() {
   const conferenceDatesLabel = getLabelBetweenTwoIsoStringDates(
     data.conference.startDate,
     data.conference.endDate,
   );
 
-  const speakersWithTheirTalkAndTrack = data.speakers.map((speaker) => {
-    const talk = data.talks.find((talk) => talk.speakerId === speaker.id)!;
-    const track = data.tracks.find((track) => track.id === talk.trackId)!;
-    return { ...speaker, talk: { ...talk, track } };
-  });
+  const someSpeakersWithTheirTalkAndTrack = data.speakers
+    .slice(0, 8)
+    .map((speaker) => {
+      const talk = data.talks.find((talk) => talk.speakerId === speaker.id)!;
+      const track = data.tracks.find((track) => track.id === talk.trackId)!;
+      return { ...speaker, talk: { ...talk, track } };
+    });
 
   const tracksWithoutKeynoteOne = data.tracks.filter(
     (track) => track.name !== "Keynote",
@@ -81,6 +85,8 @@ export default function Home() {
                 </p>
               </div>
               <Button
+                as="link"
+                href={`/schedule?talk=${data.talks[0].id}`}
                 label="View Talk"
                 variant="secondary"
                 className="md:w-fit"
@@ -110,15 +116,17 @@ export default function Home() {
       </section>
       <section className="flex flex-col gap-y-6">
         <SectionTitle title="// FEATURED_SPEAKERS" />
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 xl:gap-6">
-          {speakersWithTheirTalkAndTrack.map((speaker) => {
+        <SpeakerWrapper>
+          {someSpeakersWithTheirTalkAndTrack.map((speaker) => {
             return <Speaker key={speaker.id} {...speaker} />;
           })}
-        </div>
+        </SpeakerWrapper>
         <Button
+          as="link"
+          href="/speakers"
           variant="primary"
           label="View all speakers"
-          className="mx-auto mt-6 w-fit"
+          className="mx-auto w-fit"
         />
       </section>
       <section className="flex flex-col gap-y-6">
@@ -131,6 +139,8 @@ export default function Home() {
           })}
         </div>
         <Button
+          as="link"
+          href="/schedule"
           variant="primary"
           label="View full schedule"
           className="mx-auto mt-6 w-fit"
