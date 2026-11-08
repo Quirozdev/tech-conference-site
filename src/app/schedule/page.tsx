@@ -1,3 +1,4 @@
+import FilterControlButton from "@/app/schedule/components/control-buttons/filter-control-button";
 import TabControlButton from "@/app/schedule/components/control-buttons/tab-control-button";
 import Schedule from "@/features/schedule/components/schedule";
 import PageTitle from "@/shared/components/page-title";
@@ -18,17 +19,28 @@ export default function SchedulePage() {
     return { ...talk, speaker, track };
   });
 
+  const tracksWithoutKeynoteOne = data.tracks.filter(
+    (track) => track.name !== "Keynote",
+  );
+
   return (
     <div className="flex flex-col gap-y-6">
       <PageTitle title="// schedule" />
       <Separator />
-      <div className="flex items-center gap-5">
-        <div role="tablist" className="flex items-center gap-5">
+      <div className="flex flex-wrap items-center gap-5">
+        <div role="tablist" className="flex flex-wrap items-center gap-5">
           <TabControlButton isSelected={true}>Day 01</TabControlButton>
           <TabControlButton isSelected={false}>Day 02</TabControlButton>
           <TabControlButton isSelected={false}>Day 03</TabControlButton>
         </div>
         <div className="h-full min-h-6 w-px bg-neutral-500"></div>
+        {tracksWithoutKeynoteOne.map((track, index) => {
+          return (
+            <FilterControlButton key={track.id} isSelected={index === 0}>
+              {track.name}
+            </FilterControlButton>
+          );
+        })}
       </div>
       <div className="flex flex-col gap-y-4">
         {talks.map((talk) => {
