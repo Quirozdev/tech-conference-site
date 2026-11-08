@@ -1,5 +1,7 @@
+import ClearControlButton from "@/app/schedule/components/control-buttons/clear-control-button";
 import FilterControlButton from "@/app/schedule/components/control-buttons/filter-control-button";
 import TabControlButton from "@/app/schedule/components/control-buttons/tab-control-button";
+import ToggleControlButton from "@/app/schedule/components/control-buttons/toggle-control-button";
 import Schedule from "@/features/schedule/components/schedule";
 import PageTitle from "@/shared/components/page-title";
 import Separator from "@/shared/components/separator";
@@ -41,6 +43,10 @@ export default function SchedulePage() {
             </FilterControlButton>
           );
         })}
+        <ToggleControlButton isSelected={false}>
+          My Schedule
+        </ToggleControlButton>
+        <ClearControlButton>Clear</ClearControlButton>
       </div>
       <div className="flex flex-col gap-y-4">
         {talks.map((talk) => {
