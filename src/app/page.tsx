@@ -7,7 +7,6 @@ import Image from "next/image";
 import Button from "@/shared/components/button";
 import { getLabelBetweenTwoIsoStringDates } from "@/shared/utils/dates";
 import SpeakerWrapper from "@/features/speakers/components/speaker-wrapper";
-import Link from "next/link";
 
 export default function HomePage() {
   const conferenceDatesLabel = getLabelBetweenTwoIsoStringDates(
