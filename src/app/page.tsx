@@ -14,8 +14,8 @@ export default function HomePage() {
     data.conference.endDate,
   );
 
-  const someSpeakersWithTheirTalkAndTrack = data.speakers
-    .slice(0, 8)
+  const featuredSpeakersWithTheirTalkAndTrack = data.speakers
+    .filter((speaker) => speaker.featured)
     .map((speaker) => {
       const talk = data.talks.find((talk) => talk.speakerId === speaker.id)!;
       const track = data.tracks.find((track) => track.id === talk.trackId)!;
@@ -116,7 +116,7 @@ export default function HomePage() {
       <section className="flex flex-col gap-y-6">
         <SectionTitle title="// FEATURED_SPEAKERS" />
         <SpeakerWrapper>
-          {someSpeakersWithTheirTalkAndTrack.map((speaker) => {
+          {featuredSpeakersWithTheirTalkAndTrack.map((speaker) => {
             return <Speaker key={speaker.id} {...speaker} />;
           })}
         </SpeakerWrapper>
