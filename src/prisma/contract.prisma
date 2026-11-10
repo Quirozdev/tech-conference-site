@@ -1,0 +1,55 @@
+// use prisma-8
+model Location {
+  id               String @id @onCreate(uuid())
+  venue            String
+  city             String
+  cityAbbreviation String
+  state            String
+}
+
+model Conference {
+  id         String     @id @onCreate(uuid())
+  brandCode  String     @unique
+  tagline    String
+  startDate  DateString
+  endDate    DateString
+  locationId String
+  location   Location   @relation(fields: [locationId], references: [id])
+  tracks     Track[]
+}
+
+model Track {
+  id           String     @id @onCreate(uuid())
+  name         String
+  description  String
+  color        String
+  conferenceId String
+  conference   Conference @relation(fields: [conferenceId], references: [id])
+}
+
+model Speaker {
+  id       String  @id @onCreate(uuid())
+  name     String
+  role     String
+  company  String
+  avatar   String
+  bio      String
+  featured Boolean
+}
+
+model Talk {
+  id           String     @id @onCreate(uuid())
+  title        String
+  conferenceId String
+  conference   Conference @relation(fields: [conferenceId], references: [id])
+  speakerId    String
+  speaker      Speaker    @relation(fields: [speakerId], references: [id])
+  day          Int
+  trackId      String
+  track        Track      @relation(fields: [trackId], references: [id])
+  startTime    TimeString
+  endTime      TimeString
+  location     String
+  description  String
+  highlighted  Boolean
+}
