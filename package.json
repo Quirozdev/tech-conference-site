@@ -7,7 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "contract:emit": "prisma contract emit"
+    "contract:emit": "prisma contract emit",
+    "migration:plan": "prisma migration plan",
+    "migration:run": "prisma db migrate --advance-ref db",
+    "migration:deploy": "prisma db migrate",
+    "migration:status": "prisma migration status",
+    "migration:check": "prisma migration check",
+    "db:seed": "tsx ./src/prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/orm-postgres": "^8.0.0-rc.23",
@@ -31,6 +37,7 @@
     "prettier-plugin-tailwindcss": "^0.8.1",
     "prisma": "^8.0.0-rc.33",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

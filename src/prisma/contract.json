@@ -59,6 +59,13 @@
                   "kind": "scalar"
                 }
               },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
               "startDate": {
                 "nullable": false,
                 "type": {
@@ -120,6 +127,9 @@
                 },
                 "locationId": {
                   "column": "locationId"
+                },
+                "name": {
+                  "column": "name"
                 },
                 "startDate": {
                   "column": "startDate"
@@ -553,6 +563,11 @@
                   "dataType": "pg/text",
                   "nullable": false
                 },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": false
+                },
                 "startDate": {
                   "codecId": "pg/date-string@1",
                   "dataType": "pg/date",
@@ -601,6 +616,11 @@
                 ]
               },
               "uniques": [
+                {
+                  "columns": [
+                    "name"
+                  ]
+                },
                 {
                   "columns": [
                     "brandCode"
@@ -914,69 +934,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "2b5376d447c58ebec392dce8e80ec5d9fdec66f6ec5c51cecb5d317cea50bd71"
-  },
-  "execution": {
-    "executionHash": "36a65416e7407324ca4ebaca36a31d2f29ff123290d8683e37db0b102e78c983",
-    "mutations": {
-      "defaults": [
-        {
-          "onCreate": {
-            "id": "uuidv4",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "Conference",
-            "field": "id",
-            "namespace": "public"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "uuidv4",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "Location",
-            "field": "id",
-            "namespace": "public"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "uuidv4",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "Speaker",
-            "field": "id",
-            "namespace": "public"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "uuidv4",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "Talk",
-            "field": "id",
-            "namespace": "public"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "uuidv4",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "Track",
-            "field": "id",
-            "namespace": "public"
-          }
-        }
-      ]
-    }
+    "storageHash": "b87051c566100dc94b60c7a870854a4022d4e9d9bb443afd015a51b7dd3eb0b3"
   },
   "capabilities": {
     "postgres": {

@@ -1,6 +1,6 @@
 // use prisma-8
 model Location {
-  id               String @id @onCreate(uuid())
+  id               String @id
   venue            String
   city             String
   cityAbbreviation String
@@ -8,7 +8,8 @@ model Location {
 }
 
 model Conference {
-  id         String     @id @onCreate(uuid())
+  id         String     @id
+  name       String     @unique
   brandCode  String     @unique
   tagline    String
   startDate  DateString
@@ -19,7 +20,7 @@ model Conference {
 }
 
 model Track {
-  id           String     @id @onCreate(uuid())
+  id           String     @id
   name         String
   description  String
   color        String
@@ -28,7 +29,7 @@ model Track {
 }
 
 model Speaker {
-  id       String  @id @onCreate(uuid())
+  id       String  @id
   name     String
   role     String
   company  String
@@ -38,7 +39,7 @@ model Speaker {
 }
 
 model Talk {
-  id           String     @id @onCreate(uuid())
+  id           String     @id
   title        String
   conferenceId String
   conference   Conference @relation(fields: [conferenceId], references: [id])

@@ -1,8 +1,11 @@
-import "dotenv/config";
+import * as dotenv from "dotenv";
+import dotEnvExpand from "dotenv-expand";
 import postgres from "@prisma/orm-postgres/runtime";
 import { contractFromJson } from "@prisma/orm-postgres/static";
 import type { Contract } from "./contract.d";
 import contractJson from "./contract.json" with { type: "json" };
+
+dotEnvExpand.expand(dotenv.config());
 
 export const contract = contractFromJson<Contract>(contractJson);
 

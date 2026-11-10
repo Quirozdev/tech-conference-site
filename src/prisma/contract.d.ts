@@ -23,9 +23,8 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'2b5376d447c58ebec392dce8e80ec5d9fdec66f6ec5c51cecb5d317cea50bd71'>;
-export type ExecutionHash =
-  ExecutionHashBase<'36a65416e7407324ca4ebaca36a31d2f29ff123290d8683e37db0b102e78c983'>;
+  StorageHashBase<'b87051c566100dc94b60c7a870854a4022d4e9d9bb443afd015a51b7dd3eb0b3'>;
+export type ExecutionHash = ExecutionHashBase<string>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
 
@@ -314,6 +313,7 @@ export namespace Models {
     endDate: FieldOutputTypes['public']['Conference']['endDate'];
     id: FieldOutputTypes['public']['Conference']['id'];
     locationId: FieldOutputTypes['public']['Conference']['locationId'];
+    name: FieldOutputTypes['public']['Conference']['name'];
     startDate: FieldOutputTypes['public']['Conference']['startDate'];
     tagline: FieldOutputTypes['public']['Conference']['tagline'];
     location: public_Location;
@@ -420,6 +420,12 @@ type ContractBase = Omit<
                   readonly nullable: false;
                   readonly many: false;
                 };
+                readonly name: {
+                  readonly dataType: 'pg/text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly many: false;
+                };
                 readonly startDate: {
                   readonly dataType: 'pg/date';
                   readonly codecId: 'pg/date-string@1';
@@ -434,7 +440,10 @@ type ContractBase = Omit<
                 };
               };
               primaryKey: { readonly columns: readonly ['id'] };
-              uniques: readonly [{ readonly columns: readonly ['brandCode'] }];
+              uniques: readonly [
+                { readonly columns: readonly ['name'] },
+                { readonly columns: readonly ['brandCode'] },
+              ];
               indexes: readonly [
                 {
                   readonly name: 'Conference_locationId_idx_7aae3038';
@@ -776,6 +785,10 @@ type ContractBase = Omit<
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
+              readonly name: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
               readonly startDate: {
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/date-string@1' };
@@ -818,6 +831,7 @@ type ContractBase = Omit<
                 readonly endDate: { readonly column: 'endDate' };
                 readonly id: { readonly column: 'id' };
                 readonly locationId: { readonly column: 'locationId' };
+                readonly name: { readonly column: 'name' };
                 readonly startDate: { readonly column: 'startDate' };
                 readonly tagline: { readonly column: 'tagline' };
               };
@@ -1090,53 +1104,6 @@ type ContractBase = Omit<
     };
   };
   readonly extensions: {};
-  readonly execution: {
-    readonly executionHash: ExecutionHash;
-    readonly mutations: {
-      readonly defaults: readonly [
-        {
-          readonly onCreate: { readonly id: 'uuidv4'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'Conference';
-            readonly field: 'id';
-            readonly namespace: 'public';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'uuidv4'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'Location';
-            readonly field: 'id';
-            readonly namespace: 'public';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'uuidv4'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'Speaker';
-            readonly field: 'id';
-            readonly namespace: 'public';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'uuidv4'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'Talk';
-            readonly field: 'id';
-            readonly namespace: 'public';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'uuidv4'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'Track';
-            readonly field: 'id';
-            readonly namespace: 'public';
-          };
-        },
-      ];
-    };
-  };
   readonly meta: {};
   readonly profileHash: ProfileHash;
 };

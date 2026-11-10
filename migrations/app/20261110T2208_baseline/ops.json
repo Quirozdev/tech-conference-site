@@ -1,0 +1,812 @@
+[
+  {
+    "id": "schema.public",
+    "label": "Create schema \"public\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres"
+    },
+    "precheck": [],
+    "execute": [
+      {
+        "description": "Create schema \"public\"",
+        "sql": "CREATE SCHEMA IF NOT EXISTS \"public\"",
+        "params": []
+      }
+    ],
+    "postcheck": []
+  },
+  {
+    "id": "table.Conference",
+    "label": "Create table \"Conference\"",
+    "summary": "Creates table \"Conference\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "Conference"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Conference\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Conference\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "table \"Conference\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Conference\"",
+        "sql": "CREATE TABLE \"public\".\"Conference\" (\n  \"brandCode\" text NOT NULL,\n  \"endDate\" date NOT NULL,\n  \"id\" text NOT NULL,\n  \"locationId\" text NOT NULL,\n  \"startDate\" date NOT NULL,\n  \"tagline\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Conference\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_class\" AS \"c\" WHERE (\"c\".\"oid\" = to_regclass($1) AND (\"c\".\"relkind\" = $2 OR \"c\".\"relkind\" = $3))) AS \"result\"",
+        "params": [
+          "\"public\".\"Conference\"",
+          "r",
+          "p"
+        ],
+        "expectation": {
+          "expects": "present",
+          "object": "table \"Conference\""
+        }
+      }
+    ]
+  },
+  {
+    "id": "table.Location",
+    "label": "Create table \"Location\"",
+    "summary": "Creates table \"Location\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "Location"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Location\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Location\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "table \"Location\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Location\"",
+        "sql": "CREATE TABLE \"public\".\"Location\" (\n  \"city\" text NOT NULL,\n  \"cityAbbreviation\" text NOT NULL,\n  \"id\" text NOT NULL,\n  \"state\" text NOT NULL,\n  \"venue\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Location\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_class\" AS \"c\" WHERE (\"c\".\"oid\" = to_regclass($1) AND (\"c\".\"relkind\" = $2 OR \"c\".\"relkind\" = $3))) AS \"result\"",
+        "params": [
+          "\"public\".\"Location\"",
+          "r",
+          "p"
+        ],
+        "expectation": {
+          "expects": "present",
+          "object": "table \"Location\""
+        }
+      }
+    ]
+  },
+  {
+    "id": "table.Speaker",
+    "label": "Create table \"Speaker\"",
+    "summary": "Creates table \"Speaker\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "Speaker"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Speaker\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Speaker\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "table \"Speaker\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Speaker\"",
+        "sql": "CREATE TABLE \"public\".\"Speaker\" (\n  \"avatar\" text NOT NULL,\n  \"bio\" text NOT NULL,\n  \"company\" text NOT NULL,\n  \"featured\" bool NOT NULL,\n  \"id\" text NOT NULL,\n  \"name\" text NOT NULL,\n  \"role\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Speaker\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_class\" AS \"c\" WHERE (\"c\".\"oid\" = to_regclass($1) AND (\"c\".\"relkind\" = $2 OR \"c\".\"relkind\" = $3))) AS \"result\"",
+        "params": [
+          "\"public\".\"Speaker\"",
+          "r",
+          "p"
+        ],
+        "expectation": {
+          "expects": "present",
+          "object": "table \"Speaker\""
+        }
+      }
+    ]
+  },
+  {
+    "id": "table.Talk",
+    "label": "Create table \"Talk\"",
+    "summary": "Creates table \"Talk\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "Talk"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Talk\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Talk\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "table \"Talk\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Talk\"",
+        "sql": "CREATE TABLE \"public\".\"Talk\" (\n  \"conferenceId\" text NOT NULL,\n  \"day\" int4 NOT NULL,\n  \"description\" text NOT NULL,\n  \"endTime\" time NOT NULL,\n  \"highlighted\" bool NOT NULL,\n  \"id\" text NOT NULL,\n  \"location\" text NOT NULL,\n  \"speakerId\" text NOT NULL,\n  \"startTime\" time NOT NULL,\n  \"title\" text NOT NULL,\n  \"trackId\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Talk\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_class\" AS \"c\" WHERE (\"c\".\"oid\" = to_regclass($1) AND (\"c\".\"relkind\" = $2 OR \"c\".\"relkind\" = $3))) AS \"result\"",
+        "params": [
+          "\"public\".\"Talk\"",
+          "r",
+          "p"
+        ],
+        "expectation": {
+          "expects": "present",
+          "object": "table \"Talk\""
+        }
+      }
+    ]
+  },
+  {
+    "id": "table.Track",
+    "label": "Create table \"Track\"",
+    "summary": "Creates table \"Track\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "Track"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Track\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Track\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "table \"Track\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Track\"",
+        "sql": "CREATE TABLE \"public\".\"Track\" (\n  \"color\" text NOT NULL,\n  \"conferenceId\" text NOT NULL,\n  \"description\" text NOT NULL,\n  \"id\" text NOT NULL,\n  \"name\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Track\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_class\" AS \"c\" WHERE (\"c\".\"oid\" = to_regclass($1) AND (\"c\".\"relkind\" = $2 OR \"c\".\"relkind\" = $3))) AS \"result\"",
+        "params": [
+          "\"public\".\"Track\"",
+          "r",
+          "p"
+        ],
+        "expectation": {
+          "expects": "present",
+          "object": "table \"Track\""
+        }
+      }
+    ]
+  },
+  {
+    "id": "unique.Conference.Conference_brandCode_key",
+    "label": "Add unique constraint on \"Conference\" (brandCode)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "unique",
+        "name": "Conference_brandCode_key",
+        "table": "Conference"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"Conference_brandCode_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Conference_brandCode_key",
+          "public",
+          "\"public\".\"Conference\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "constraint \"Conference_brandCode_key\" on \"Conference\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"Conference_brandCode_key\"",
+        "sql": "ALTER TABLE \"public\".\"Conference\" ADD CONSTRAINT \"Conference_brandCode_key\" UNIQUE (\"brandCode\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify unique constraint \"Conference_brandCode_key\" exists on (brandCode)",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3) AND \"c\".\"contype\" = $4 AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"c\".\"conkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"c\".\"conrelid\" AND key_attribute.attnum = key_column.attnum) = ($5)::jsonb)) AS \"result\"",
+        "params": [
+          "Conference_brandCode_key",
+          "public",
+          "\"public\".\"Conference\"",
+          "u",
+          "[\"brandCode\"]"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Conference.Conference_locationId_idx_7aae3038",
+    "label": "Create index \"Conference_locationId_idx_7aae3038\" on \"Conference\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "Conference_locationId_idx_7aae3038",
+        "table": "Conference"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Conference_locationId_idx_7aae3038\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Conference_locationId_idx_7aae3038\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "index \"Conference_locationId_idx_7aae3038\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Conference_locationId_idx_7aae3038\"",
+        "sql": "CREATE INDEX \"Conference_locationId_idx_7aae3038\" ON \"public\".\"Conference\" (\"locationId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Conference_locationId_idx_7aae3038\" exists on \"Conference\" with the planned definition",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_class\" AS \"c\" INNER JOIN \"pg_index\" AS \"i\" ON \"i\".\"indexrelid\" = \"c\".\"oid\" INNER JOIN \"pg_am\" AS \"m\" ON \"m\".\"oid\" = \"c\".\"relam\" WHERE (\"c\".\"oid\" = to_regclass($1) AND (\"c\".\"relkind\" = $2 OR \"c\".\"relkind\" = $3) AND \"i\".\"indrelid\" = to_regclass($4) AND NOT (\"i\".\"indisunique\") AND \"m\".\"amname\" = $5 AND (\"i\".\"indexprs\" IS NULL AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"i\".\"indkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"i\".\"indrelid\" AND key_attribute.attnum = key_column.attnum) = ($6)::jsonb) AND \"i\".\"indpred\" IS NULL)) AS \"result\"",
+        "params": [
+          "\"public\".\"Conference_locationId_idx_7aae3038\"",
+          "i",
+          "I",
+          "\"public\".\"Conference\"",
+          "btree",
+          "[\"locationId\"]"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Talk.Talk_conferenceId_idx_abfabfd0",
+    "label": "Create index \"Talk_conferenceId_idx_abfabfd0\" on \"Talk\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "Talk_conferenceId_idx_abfabfd0",
+        "table": "Talk"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Talk_conferenceId_idx_abfabfd0\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Talk_conferenceId_idx_abfabfd0\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "index \"Talk_conferenceId_idx_abfabfd0\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Talk_conferenceId_idx_abfabfd0\"",
+        "sql": "CREATE INDEX \"Talk_conferenceId_idx_abfabfd0\" ON \"public\".\"Talk\" (\"conferenceId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Talk_conferenceId_idx_abfabfd0\" exists on \"Talk\" with the planned definition",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_class\" AS \"c\" INNER JOIN \"pg_index\" AS \"i\" ON \"i\".\"indexrelid\" = \"c\".\"oid\" INNER JOIN \"pg_am\" AS \"m\" ON \"m\".\"oid\" = \"c\".\"relam\" WHERE (\"c\".\"oid\" = to_regclass($1) AND (\"c\".\"relkind\" = $2 OR \"c\".\"relkind\" = $3) AND \"i\".\"indrelid\" = to_regclass($4) AND NOT (\"i\".\"indisunique\") AND \"m\".\"amname\" = $5 AND (\"i\".\"indexprs\" IS NULL AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"i\".\"indkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"i\".\"indrelid\" AND key_attribute.attnum = key_column.attnum) = ($6)::jsonb) AND \"i\".\"indpred\" IS NULL)) AS \"result\"",
+        "params": [
+          "\"public\".\"Talk_conferenceId_idx_abfabfd0\"",
+          "i",
+          "I",
+          "\"public\".\"Talk\"",
+          "btree",
+          "[\"conferenceId\"]"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Talk.Talk_speakerId_idx_b4dfd9e9",
+    "label": "Create index \"Talk_speakerId_idx_b4dfd9e9\" on \"Talk\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "Talk_speakerId_idx_b4dfd9e9",
+        "table": "Talk"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Talk_speakerId_idx_b4dfd9e9\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Talk_speakerId_idx_b4dfd9e9\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "index \"Talk_speakerId_idx_b4dfd9e9\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Talk_speakerId_idx_b4dfd9e9\"",
+        "sql": "CREATE INDEX \"Talk_speakerId_idx_b4dfd9e9\" ON \"public\".\"Talk\" (\"speakerId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Talk_speakerId_idx_b4dfd9e9\" exists on \"Talk\" with the planned definition",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_class\" AS \"c\" INNER JOIN \"pg_index\" AS \"i\" ON \"i\".\"indexrelid\" = \"c\".\"oid\" INNER JOIN \"pg_am\" AS \"m\" ON \"m\".\"oid\" = \"c\".\"relam\" WHERE (\"c\".\"oid\" = to_regclass($1) AND (\"c\".\"relkind\" = $2 OR \"c\".\"relkind\" = $3) AND \"i\".\"indrelid\" = to_regclass($4) AND NOT (\"i\".\"indisunique\") AND \"m\".\"amname\" = $5 AND (\"i\".\"indexprs\" IS NULL AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"i\".\"indkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"i\".\"indrelid\" AND key_attribute.attnum = key_column.attnum) = ($6)::jsonb) AND \"i\".\"indpred\" IS NULL)) AS \"result\"",
+        "params": [
+          "\"public\".\"Talk_speakerId_idx_b4dfd9e9\"",
+          "i",
+          "I",
+          "\"public\".\"Talk\"",
+          "btree",
+          "[\"speakerId\"]"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Talk.Talk_trackId_idx_8b560769",
+    "label": "Create index \"Talk_trackId_idx_8b560769\" on \"Talk\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "Talk_trackId_idx_8b560769",
+        "table": "Talk"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Talk_trackId_idx_8b560769\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Talk_trackId_idx_8b560769\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "index \"Talk_trackId_idx_8b560769\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Talk_trackId_idx_8b560769\"",
+        "sql": "CREATE INDEX \"Talk_trackId_idx_8b560769\" ON \"public\".\"Talk\" (\"trackId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Talk_trackId_idx_8b560769\" exists on \"Talk\" with the planned definition",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_class\" AS \"c\" INNER JOIN \"pg_index\" AS \"i\" ON \"i\".\"indexrelid\" = \"c\".\"oid\" INNER JOIN \"pg_am\" AS \"m\" ON \"m\".\"oid\" = \"c\".\"relam\" WHERE (\"c\".\"oid\" = to_regclass($1) AND (\"c\".\"relkind\" = $2 OR \"c\".\"relkind\" = $3) AND \"i\".\"indrelid\" = to_regclass($4) AND NOT (\"i\".\"indisunique\") AND \"m\".\"amname\" = $5 AND (\"i\".\"indexprs\" IS NULL AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"i\".\"indkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"i\".\"indrelid\" AND key_attribute.attnum = key_column.attnum) = ($6)::jsonb) AND \"i\".\"indpred\" IS NULL)) AS \"result\"",
+        "params": [
+          "\"public\".\"Talk_trackId_idx_8b560769\"",
+          "i",
+          "I",
+          "\"public\".\"Talk\"",
+          "btree",
+          "[\"trackId\"]"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Track.Track_conferenceId_idx_abfabfd0",
+    "label": "Create index \"Track_conferenceId_idx_abfabfd0\" on \"Track\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "Track_conferenceId_idx_abfabfd0",
+        "table": "Track"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Track_conferenceId_idx_abfabfd0\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"Track_conferenceId_idx_abfabfd0\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "index \"Track_conferenceId_idx_abfabfd0\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Track_conferenceId_idx_abfabfd0\"",
+        "sql": "CREATE INDEX \"Track_conferenceId_idx_abfabfd0\" ON \"public\".\"Track\" (\"conferenceId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Track_conferenceId_idx_abfabfd0\" exists on \"Track\" with the planned definition",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_class\" AS \"c\" INNER JOIN \"pg_index\" AS \"i\" ON \"i\".\"indexrelid\" = \"c\".\"oid\" INNER JOIN \"pg_am\" AS \"m\" ON \"m\".\"oid\" = \"c\".\"relam\" WHERE (\"c\".\"oid\" = to_regclass($1) AND (\"c\".\"relkind\" = $2 OR \"c\".\"relkind\" = $3) AND \"i\".\"indrelid\" = to_regclass($4) AND NOT (\"i\".\"indisunique\") AND \"m\".\"amname\" = $5 AND (\"i\".\"indexprs\" IS NULL AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"i\".\"indkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"i\".\"indrelid\" AND key_attribute.attnum = key_column.attnum) = ($6)::jsonb) AND \"i\".\"indpred\" IS NULL)) AS \"result\"",
+        "params": [
+          "\"public\".\"Track_conferenceId_idx_abfabfd0\"",
+          "i",
+          "I",
+          "\"public\".\"Track\"",
+          "btree",
+          "[\"conferenceId\"]"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.Conference.Conference_locationId_fkey",
+    "label": "Add foreign key \"Conference_locationId_fkey\" on \"Conference\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "Conference_locationId_fkey",
+        "table": "Conference"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"Conference_locationId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Conference_locationId_fkey",
+          "public",
+          "\"public\".\"Conference\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "FK \"Conference_locationId_fkey\" on \"Conference\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"Conference_locationId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"Conference\"\nADD CONSTRAINT \"Conference_locationId_fkey\"\nFOREIGN KEY (\"locationId\")\nREFERENCES \"public\".\"Location\" (\"id\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"Conference_locationId_fkey\" exists with the planned columns, referenced table and actions",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3) AND \"c\".\"contype\" = $4 AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"c\".\"conkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"c\".\"conrelid\" AND key_attribute.attnum = key_column.attnum) = ($5)::jsonb AND \"c\".\"confrelid\" = to_regclass($6) AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"c\".\"confkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"c\".\"confrelid\" AND key_attribute.attnum = key_column.attnum) = ($7)::jsonb AND \"c\".\"confdeltype\" = $8 AND \"c\".\"confupdtype\" = $9)) AS \"result\"",
+        "params": [
+          "Conference_locationId_fkey",
+          "public",
+          "\"public\".\"Conference\"",
+          "f",
+          "[\"locationId\"]",
+          "\"public\".\"Location\"",
+          "[\"id\"]",
+          "a",
+          "a"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.Talk.Talk_conferenceId_fkey",
+    "label": "Add foreign key \"Talk_conferenceId_fkey\" on \"Talk\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "Talk_conferenceId_fkey",
+        "table": "Talk"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"Talk_conferenceId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Talk_conferenceId_fkey",
+          "public",
+          "\"public\".\"Talk\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "FK \"Talk_conferenceId_fkey\" on \"Talk\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"Talk_conferenceId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"Talk\"\nADD CONSTRAINT \"Talk_conferenceId_fkey\"\nFOREIGN KEY (\"conferenceId\")\nREFERENCES \"public\".\"Conference\" (\"id\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"Talk_conferenceId_fkey\" exists with the planned columns, referenced table and actions",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3) AND \"c\".\"contype\" = $4 AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"c\".\"conkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"c\".\"conrelid\" AND key_attribute.attnum = key_column.attnum) = ($5)::jsonb AND \"c\".\"confrelid\" = to_regclass($6) AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"c\".\"confkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"c\".\"confrelid\" AND key_attribute.attnum = key_column.attnum) = ($7)::jsonb AND \"c\".\"confdeltype\" = $8 AND \"c\".\"confupdtype\" = $9)) AS \"result\"",
+        "params": [
+          "Talk_conferenceId_fkey",
+          "public",
+          "\"public\".\"Talk\"",
+          "f",
+          "[\"conferenceId\"]",
+          "\"public\".\"Conference\"",
+          "[\"id\"]",
+          "a",
+          "a"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.Talk.Talk_speakerId_fkey",
+    "label": "Add foreign key \"Talk_speakerId_fkey\" on \"Talk\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "Talk_speakerId_fkey",
+        "table": "Talk"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"Talk_speakerId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Talk_speakerId_fkey",
+          "public",
+          "\"public\".\"Talk\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "FK \"Talk_speakerId_fkey\" on \"Talk\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"Talk_speakerId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"Talk\"\nADD CONSTRAINT \"Talk_speakerId_fkey\"\nFOREIGN KEY (\"speakerId\")\nREFERENCES \"public\".\"Speaker\" (\"id\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"Talk_speakerId_fkey\" exists with the planned columns, referenced table and actions",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3) AND \"c\".\"contype\" = $4 AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"c\".\"conkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"c\".\"conrelid\" AND key_attribute.attnum = key_column.attnum) = ($5)::jsonb AND \"c\".\"confrelid\" = to_regclass($6) AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"c\".\"confkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"c\".\"confrelid\" AND key_attribute.attnum = key_column.attnum) = ($7)::jsonb AND \"c\".\"confdeltype\" = $8 AND \"c\".\"confupdtype\" = $9)) AS \"result\"",
+        "params": [
+          "Talk_speakerId_fkey",
+          "public",
+          "\"public\".\"Talk\"",
+          "f",
+          "[\"speakerId\"]",
+          "\"public\".\"Speaker\"",
+          "[\"id\"]",
+          "a",
+          "a"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.Talk.Talk_trackId_fkey",
+    "label": "Add foreign key \"Talk_trackId_fkey\" on \"Talk\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "Talk_trackId_fkey",
+        "table": "Talk"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"Talk_trackId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Talk_trackId_fkey",
+          "public",
+          "\"public\".\"Talk\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "FK \"Talk_trackId_fkey\" on \"Talk\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"Talk_trackId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"Talk\"\nADD CONSTRAINT \"Talk_trackId_fkey\"\nFOREIGN KEY (\"trackId\")\nREFERENCES \"public\".\"Track\" (\"id\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"Talk_trackId_fkey\" exists with the planned columns, referenced table and actions",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3) AND \"c\".\"contype\" = $4 AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"c\".\"conkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"c\".\"conrelid\" AND key_attribute.attnum = key_column.attnum) = ($5)::jsonb AND \"c\".\"confrelid\" = to_regclass($6) AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"c\".\"confkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"c\".\"confrelid\" AND key_attribute.attnum = key_column.attnum) = ($7)::jsonb AND \"c\".\"confdeltype\" = $8 AND \"c\".\"confupdtype\" = $9)) AS \"result\"",
+        "params": [
+          "Talk_trackId_fkey",
+          "public",
+          "\"public\".\"Talk\"",
+          "f",
+          "[\"trackId\"]",
+          "\"public\".\"Track\"",
+          "[\"id\"]",
+          "a",
+          "a"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.Track.Track_conferenceId_fkey",
+    "label": "Add foreign key \"Track_conferenceId_fkey\" on \"Track\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "Track_conferenceId_fkey",
+        "table": "Track"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"Track_conferenceId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Track_conferenceId_fkey",
+          "public",
+          "\"public\".\"Track\""
+        ],
+        "expectation": {
+          "expects": "absent",
+          "object": "FK \"Track_conferenceId_fkey\" on \"Track\""
+        }
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"Track_conferenceId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"Track\"\nADD CONSTRAINT \"Track_conferenceId_fkey\"\nFOREIGN KEY (\"conferenceId\")\nREFERENCES \"public\".\"Conference\" (\"id\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"Track_conferenceId_fkey\" exists with the planned columns, referenced table and actions",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3) AND \"c\".\"contype\" = $4 AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"c\".\"conkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"c\".\"conrelid\" AND key_attribute.attnum = key_column.attnum) = ($5)::jsonb AND \"c\".\"confrelid\" = to_regclass($6) AND (SELECT coalesce(jsonb_agg(key_attribute.attname ORDER BY key_column.position), '[]'::jsonb) FROM unnest(\"c\".\"confkey\"::int2[]) WITH ORDINALITY AS key_column(attnum, position) JOIN pg_attribute key_attribute ON key_attribute.attrelid = \"c\".\"confrelid\" AND key_attribute.attnum = key_column.attnum) = ($7)::jsonb AND \"c\".\"confdeltype\" = $8 AND \"c\".\"confupdtype\" = $9)) AS \"result\"",
+        "params": [
+          "Track_conferenceId_fkey",
+          "public",
+          "\"public\".\"Track\"",
+          "f",
+          "[\"conferenceId\"]",
+          "\"public\".\"Conference\"",
+          "[\"id\"]",
+          "a",
+          "a"
+        ]
+      }
+    ]
+  }
+]
