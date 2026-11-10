@@ -26,13 +26,15 @@ export default function HomePage() {
     (track) => track.name !== "Keynote",
   );
 
-  const latestTalks = data.talks.slice(-5, -1).map((talk) => {
-    const speaker = data.speakers.find(
-      (speaker) => speaker.id === talk.speakerId,
-    )!;
-    const track = data.tracks.find((track) => track.id === talk.trackId)!;
-    return { ...talk, speaker, track };
-  });
+  const highlightedTalks = data.talks
+    .filter((talk) => talk.highlighted)
+    .map((talk) => {
+      const speaker = data.speakers.find(
+        (speaker) => speaker.id === talk.speakerId,
+      )!;
+      const track = data.tracks.find((track) => track.id === talk.trackId)!;
+      return { ...talk, speaker, track };
+    });
 
   return (
     <div className="flex flex-col gap-y-11.25">
@@ -131,7 +133,7 @@ export default function HomePage() {
       <section className="flex flex-col gap-y-6">
         <SectionTitle title="// SCHEDULE_HIGHLIGHTS" />
         <div className="flex flex-col gap-y-4">
-          {latestTalks.map((talk) => {
+          {highlightedTalks.map((talk) => {
             return (
               <Schedule includeDetailsSection={true} key={talk.id} {...talk} />
             );
