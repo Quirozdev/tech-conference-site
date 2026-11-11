@@ -7,14 +7,15 @@ import SpeakersSectionEmpty from "@/features/speakers/components/speakers-sectio
 
 interface Props {
   featuredOnly: boolean;
+  title?: string;
 }
 
-export default async function SpeakersSection({ featuredOnly }: Props) {
+export default async function SpeakersSection({ featuredOnly, title }: Props) {
   const speakers = await getSpeakers(featuredOnly);
 
   return (
     <section className="flex flex-col gap-y-6">
-      <SectionTitle title="// FEATURED_SPEAKERS" />
+      {title && <SectionTitle title={title} />}
       {speakers.length > 0 ? (
         <SpeakerWrapper>
           {speakers.map((speaker) => {

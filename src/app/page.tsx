@@ -20,7 +20,7 @@ export default function HomePage() {
       </Suspense>
 
       <Suspense fallback={<SpeakersSectionSkeleton featuredOnly={true} />}>
-        <SpeakersSection featuredOnly={true} />
+        <SpeakersSection featuredOnly={true} title="// FEATURED_SPEAKERS" />
       </Suspense>
 
       <Suspense fallback={<TalksSectionSkeleton highlightedOnly={true} />}>
