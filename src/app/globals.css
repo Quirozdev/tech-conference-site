@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-shimmer";
 
 @theme inline {
   --font-jetbrains-mono: var(--font-jetbrains-mono);

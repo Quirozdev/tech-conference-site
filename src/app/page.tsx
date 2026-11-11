@@ -7,6 +7,9 @@ import Image from "next/image";
 import Button from "@/shared/components/button";
 import { getLabelBetweenTwoIsoStringDates } from "@/shared/utils/dates";
 import SpeakerWrapper from "@/features/speakers/components/speaker-wrapper";
+import { TracksSection } from "@/features/tracks/components/tracks-section";
+import { Suspense } from "react";
+import TracksSectionSkeleton from "@/features/tracks/components/tracks-section-skeleton";
 
 export default function HomePage() {
   const conferenceDatesLabel = getLabelBetweenTwoIsoStringDates(
@@ -107,14 +110,9 @@ export default function HomePage() {
           </div>
         </article>
       </section>
-      <section className="flex flex-col gap-y-5 xl:gap-y-6">
-        <SectionTitle title="// TRACKS" />
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 xl:gap-x-4">
-          {tracksWithoutKeynoteOne.map((track) => {
-            return <Track key={track.id} {...track} />;
-          })}
-        </div>
-      </section>
+      <Suspense fallback={<TracksSectionSkeleton />}>
+        <TracksSection />
+      </Suspense>
       <section className="flex flex-col gap-y-6">
         <SectionTitle title="// FEATURED_SPEAKERS" />
         <SpeakerWrapper>
