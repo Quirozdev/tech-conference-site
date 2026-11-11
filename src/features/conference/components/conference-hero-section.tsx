@@ -1,5 +1,5 @@
 import ConferenceCard from "@/features/conference/components/conference-card";
-import ConferenceHeroSectionEmpty from "@/features/conference/components/conference-hero-section-empty";
+import ConferenceEmpty from "@/features/conference/components/conference-empty";
 import { getConference } from "@/features/conference/services/get-conference";
 import OpeningTalk from "@/features/talks/components/opening-talk";
 import OpeningTalkEmpty from "@/features/talks/components/opening-talk-empty";
@@ -9,7 +9,7 @@ export default async function ConferenceHeroSection() {
   const conference = await getConference();
 
   if (!conference) {
-    return <ConferenceHeroSectionEmpty />;
+    return <ConferenceEmpty />;
   }
 
   const openingTalk = await getOpeningTalk(conference.id);

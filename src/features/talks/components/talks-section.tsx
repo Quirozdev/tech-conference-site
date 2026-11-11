@@ -1,3 +1,4 @@
+import ConferenceEmpty from "@/features/conference/components/conference-empty";
 import { getConference } from "@/features/conference/services/get-conference";
 import Schedule from "@/features/talks/components/schedule";
 import { getTalks } from "@/features/talks/services/get-talks";
@@ -14,6 +15,11 @@ export default async function TalksSection({
   includeBookmark,
 }: Props) {
   const conference = await getConference();
+
+  if (!conference) {
+    return <ConferenceEmpty />;
+  }
+
   const talks = await getTalks(conference?.id, highlightedOnly);
 
   return (
