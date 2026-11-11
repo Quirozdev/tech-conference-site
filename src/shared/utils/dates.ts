@@ -13,6 +13,19 @@ export const MONTHS: Record<number, string> = {
   11: "Dec",
 } as const;
 
+export function formatDateToIsoStringWithoutTime(date: Date) {
+  let day: number | string = date.getDate();
+  let month: number | string = date.getMonth() + 1;
+  const year = date.getFullYear();
+  if (day < 10) {
+    day = "0" + day;
+  }
+  if (month < 10) {
+    month = "0" + month;
+  }
+  return `${year}-${month}-${day}`;
+}
+
 export function extractDateComponentsFromIsoStringDateWithoutTime(
   date: string,
 ) {
@@ -54,4 +67,25 @@ export function getLabelBetweenTwoIsoStringDates(
 
 export function formatTimeString(timeString: string) {
   return timeString.split(":").slice(0, 2).join(":");
+}
+
+export function addToDate(
+  date: Date,
+  {
+    years,
+    months,
+    days,
+  }: Partial<{ years: number; months: number; days: number }>,
+) {
+  const result = new Date(date);
+  if (years) {
+    result.setFullYear(result.getFullYear() + years);
+  }
+  if (months) {
+    result.setMonth(result.getMonth() + months);
+  }
+  if (days) {
+    result.setDate(result.getDate() + days);
+  }
+  return result;
 }
