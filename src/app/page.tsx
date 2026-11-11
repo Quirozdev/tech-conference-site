@@ -24,7 +24,11 @@ export default function HomePage() {
       </Suspense>
 
       <Suspense fallback={<TalksSectionSkeleton highlightedOnly={true} />}>
-        <TalksSection highlightedOnly={true} includeBookmark={false} />
+        <TalksSection
+          highlightedOnly={true}
+          includeBookmark={false}
+          title="// SCHEDULE_HIGHLIGHTS"
+        />
       </Suspense>
     </div>
   );

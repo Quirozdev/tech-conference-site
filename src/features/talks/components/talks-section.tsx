@@ -9,11 +9,13 @@ import SectionTitle from "@/shared/components/section-title";
 interface Props {
   highlightedOnly: boolean;
   includeBookmark: boolean;
+  title?: string;
 }
 
 export default async function TalksSection({
   highlightedOnly,
   includeBookmark,
+  title,
 }: Props) {
   const conference = await getConference();
 
@@ -25,7 +27,7 @@ export default async function TalksSection({
 
   return (
     <section className="flex flex-col gap-y-6">
-      <SectionTitle title="// SCHEDULE_HIGHLIGHTS" />
+      {title && <SectionTitle title={title} />}
       {talks.length > 0 ? (
         <div className="flex flex-col gap-y-4">
           {talks.map((talk) => {

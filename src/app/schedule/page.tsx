@@ -2,25 +2,19 @@ import ClearControlButton from "@/app/schedule/components/control-buttons/clear-
 import FilterControlButton from "@/app/schedule/components/control-buttons/filter-control-button";
 import TabControlButton from "@/app/schedule/components/control-buttons/tab-control-button";
 import ToggleControlButton from "@/app/schedule/components/control-buttons/toggle-control-button";
-import Schedule from "@/features/talks/components/schedule";
+import TalksSection from "@/features/talks/components/talks-section";
+import TalksSectionSkeleton from "@/features/talks/components/talks-section-skeleton";
 import PageTitle from "@/shared/components/page-title";
 import Separator from "@/shared/components/separator";
 import { data } from "@/shared/data/data";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Schedule",
 };
 
 export default function SchedulePage() {
-  const talks = data.talks.map((talk) => {
-    const speaker = data.speakers.find(
-      (speaker) => speaker.id === talk.speakerId,
-    )!;
-    const track = data.tracks.find((track) => track.id === talk.trackId)!;
-    return { ...talk, speaker, track };
-  });
-
   const tracksWithoutKeynoteOne = data.tracks.filter(
     (track) => track.name !== "Keynote",
   );
@@ -48,18 +42,10 @@ export default function SchedulePage() {
         </ToggleControlButton>
         <ClearControlButton>Clear</ClearControlButton>
       </div>
-      <div className="flex flex-col gap-y-4">
-        {talks.map((talk) => {
-          return (
-            <Schedule
-              key={talk.id}
-              includeDetailsSection={true}
-              includeBookmark={true}
-              {...talk}
-            />
-          );
-        })}
-      </div>
+
+      <Suspense fallback={<TalksSectionSkeleton highlightedOnly={true} />}>
+        <TalksSection highlightedOnly={false} includeBookmark={true} />
+      </Suspense>
     </div>
   );
 }
