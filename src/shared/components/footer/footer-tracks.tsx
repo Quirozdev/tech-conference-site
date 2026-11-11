@@ -9,17 +9,21 @@ export default async function FooterTracks() {
       <h3 className="text-preset-6 font-medium whitespace-nowrap text-green-200 uppercase">
         {"// Tracks"}
       </h3>
-      <div className="flex flex-col gap-y-3">
-        {tracks.map((track) => {
-          return (
-            <FooterLink
-              key={track.id}
-              href={`/schedule?track=${track.id}`}
-              label={track.name}
-            />
-          );
-        })}
-      </div>
+      {tracks.length > 0 ? (
+        <div className="flex flex-col gap-y-3">
+          {tracks.map((track) => {
+            return (
+              <FooterLink
+                key={track.id}
+                href={`/schedule?track=${track.id}`}
+                label={track.name}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <FooterLink href="#" label="No tracks found" />
+      )}
     </div>
   );
 }
