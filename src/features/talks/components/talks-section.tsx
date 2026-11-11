@@ -1,6 +1,7 @@
 import ConferenceEmpty from "@/features/conference/components/conference-empty";
 import { getConference } from "@/features/conference/services/get-conference";
 import Schedule from "@/features/talks/components/schedule";
+import TalksSectionEmpty from "@/features/talks/components/talks-section-empty";
 import { getTalks } from "@/features/talks/services/get-talks";
 import Button from "@/shared/components/button";
 import SectionTitle from "@/shared/components/section-title";
@@ -25,18 +26,22 @@ export default async function TalksSection({
   return (
     <section className="flex flex-col gap-y-6">
       <SectionTitle title="// SCHEDULE_HIGHLIGHTS" />
-      <div className="flex flex-col gap-y-4">
-        {talks.map((talk) => {
-          return (
-            <Schedule
-              key={talk.id}
-              includeDetailsSection={true}
-              includeBookmark={includeBookmark}
-              {...talk}
-            />
-          );
-        })}
-      </div>
+      {talks.length > 0 ? (
+        <div className="flex flex-col gap-y-4">
+          {talks.map((talk) => {
+            return (
+              <Schedule
+                key={talk.id}
+                includeDetailsSection={true}
+                includeBookmark={includeBookmark}
+                {...talk}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <TalksSectionEmpty />
+      )}
       {highlightedOnly && (
         <Button
           as="link"
