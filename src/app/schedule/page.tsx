@@ -2,7 +2,7 @@ import ClearControlButton from "@/app/schedule/components/control-buttons/clear-
 import FilterControlButton from "@/app/schedule/components/control-buttons/filter-control-button";
 import TabControlButton from "@/app/schedule/components/control-buttons/tab-control-button";
 import ToggleControlButton from "@/app/schedule/components/control-buttons/toggle-control-button";
-import Schedule from "@/features/schedule/components/schedule";
+import Schedule from "@/features/talks/components/schedule";
 import PageTitle from "@/shared/components/page-title";
 import Separator from "@/shared/components/separator";
 import { data } from "@/shared/data/data";

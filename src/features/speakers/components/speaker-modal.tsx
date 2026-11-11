@@ -2,7 +2,7 @@ import SectionTitle from "@/shared/components/section-title";
 import Separator from "@/shared/components/separator";
 import SmallButton from "@/shared/components/small-button";
 import { useRemoveVerticalScrolling } from "@/shared/hooks/use-remove-vertical-scrolling";
-import Schedule from "@/features/schedule/components/schedule";
+import Schedule from "@/features/talks/components/schedule";
 import Image from "next/image";
 import { useEffect, useId, useRef } from "react";
 import type { SpeakerWithRelations } from "@/features/speakers/types";
@@ -112,6 +112,7 @@ export default function SpeakerModal(props: Props) {
           highlighted={props.talk[0].highlighted}
           speakerId={props.talk[0].speakerId}
           trackId={props.talk[0].trackId}
+          conferenceId={props.talk[0].conferenceId}
           speaker={{
             id: props.id,
             name: props.name,

@@ -1,5 +1,3 @@
-import Schedule from "@/features/schedule/components/schedule";
-import SectionTitle from "@/shared/components/section-title";
 import { data } from "@/shared/data/data";
 import Image from "next/image";
 import Button from "@/shared/components/button";
@@ -9,22 +7,14 @@ import TracksSection from "@/features/tracks/components/tracks-section";
 import TracksSectionSkeleton from "@/features/tracks/components/tracks-section-skeleton";
 import SpeakersSection from "@/features/speakers/components/speakers-section";
 import SpeakersSectionSkeleton from "@/features/speakers/components/speakers-section-skeleton";
+import TalksSection from "@/features/talks/components/talks-section";
+import TalksSectionSkeleton from "@/features/talks/components/talks-section-skeleton";
 
 export default function HomePage() {
   const conferenceDatesLabel = getLabelBetweenTwoIsoStringDates(
     data.conference.startDate,
     data.conference.endDate,
   );
-
-  const highlightedTalks = data.talks
-    .filter((talk) => talk.highlighted)
-    .map((talk) => {
-      const speaker = data.speakers.find(
-        (speaker) => speaker.id === talk.speakerId,
-      )!;
-      const track = data.tracks.find((track) => track.id === talk.trackId)!;
-      return { ...talk, speaker, track };
-    });
 
   return (
     <div className="flex flex-col gap-y-11.25">
@@ -102,27 +92,13 @@ export default function HomePage() {
         <TracksSection />
       </Suspense>
 
-      <Suspense fallback={<SpeakersSectionSkeleton />}>
+      <Suspense fallback={<SpeakersSectionSkeleton featuredOnly={true} />}>
         <SpeakersSection featuredOnly={true} />
       </Suspense>
 
-      <section className="flex flex-col gap-y-6">
-        <SectionTitle title="// SCHEDULE_HIGHLIGHTS" />
-        <div className="flex flex-col gap-y-4">
-          {highlightedTalks.map((talk) => {
-            return (
-              <Schedule includeDetailsSection={true} key={talk.id} {...talk} />
-            );
-          })}
-        </div>
-        <Button
-          as="link"
-          href="/schedule"
-          variant="primary"
-          label="View full schedule"
-          className="mx-auto mt-6 w-fit"
-        />
-      </section>
+      <Suspense fallback={<TalksSectionSkeleton highlightedOnly={true} />}>
+        <TalksSection highlightedOnly={true} />
+      </Suspense>
     </div>
   );
 }

@@ -1,18 +1,14 @@
 "use client";
 
-import BookmarkButton from "@/features/schedule/components/bookmark-button";
-import { Speaker } from "@/features/speakers/types";
-import type { Talk } from "@/features/talks/types";
-import { Track } from "@/features/tracks/types";
+import BookmarkButton from "@/features/talks/components/bookmark-button";
+import { TalkWithRelations } from "@/features/talks/types";
 import Separator from "@/shared/components/separator";
 import { cn } from "@/shared/utils/cn";
 import Image from "next/image";
 import { useState } from "react";
 
-interface Props extends Talk {
+interface Props extends TalkWithRelations {
   includeDetailsSection: boolean;
-  speaker: Speaker;
-  track: Track;
 }
 
 export default function Schedule(props: Props) {

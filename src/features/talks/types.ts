@@ -1,15 +1,9 @@
-import type { Speaker } from "@/features/speakers/types";
-import type { Track } from "@/features/tracks/types";
+import { Models } from "@/prisma/contract";
+import { Scalars, Shape } from "@prisma/orm-postgres/components";
 
-export interface Talk {
-  id: string;
-  title: string;
-  speakerId: Speaker["id"];
-  day: number;
-  trackId: Track["id"];
-  startTime: string;
-  endTime: string;
-  location: string;
-  description: string;
-  highlighted: boolean;
-}
+export type Talk = Scalars<Models.public_Talk>;
+
+export type TalkWithRelations = Shape<
+  Models.public_Talk,
+  { "+": "speaker" | "track" }
+>;
