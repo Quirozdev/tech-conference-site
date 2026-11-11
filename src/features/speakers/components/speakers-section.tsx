@@ -19,13 +19,15 @@ export default async function SpeakersSection({ featuredOnly }: Props) {
           return <Speaker key={speaker.id} {...speaker} />;
         })}
       </SpeakerWrapper>
-      <Button
-        as="link"
-        href="/speakers"
-        variant="primary"
-        label="View all speakers"
-        className="mx-auto w-fit"
-      />
+      {featuredOnly && (
+        <Button
+          as="link"
+          href="/speakers"
+          variant="primary"
+          label="View all speakers"
+          className="mx-auto w-fit"
+        />
+      )}
     </section>
   );
 }

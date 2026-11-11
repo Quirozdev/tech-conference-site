@@ -3,12 +3,16 @@ import Button from "@/shared/components/button";
 import SectionTitle from "@/shared/components/section-title";
 import Skeleton from "@/shared/components/skeleton";
 
-export default function SpeakersSectionSkeleton() {
+interface Props {
+  skeletonsCount?: number;
+}
+
+export default function SpeakersSectionSkeleton({ skeletonsCount = 8 }: Props) {
   return (
     <section className="flex flex-col gap-y-6">
       <SectionTitle title="// FEATURED_SPEAKERS" />
       <SpeakerWrapper>
-        {Array.from({ length: 8 }, (_, index) => {
+        {Array.from({ length: skeletonsCount }, (_, index) => {
           return <Skeleton key={index} className="h-103 xl:h-108.25" />;
         })}
       </SpeakerWrapper>
