@@ -2,7 +2,7 @@ import { getTracks } from "@/features/tracks/services/get-tracks";
 import SectionTitle from "@/shared/components/section-title";
 import Track from "@/features/tracks/components/track";
 
-export async function TracksSection() {
+export default async function TracksSection() {
   const tracks = await getTracks();
 
   return (

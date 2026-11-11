@@ -1,32 +1,19 @@
 import Schedule from "@/features/schedule/components/schedule";
 import SectionTitle from "@/shared/components/section-title";
-import Speaker from "@/features/speakers/components/speaker";
-import Track from "@/features/tracks/components/track";
 import { data } from "@/shared/data/data";
 import Image from "next/image";
 import Button from "@/shared/components/button";
 import { getLabelBetweenTwoIsoStringDates } from "@/shared/utils/dates";
-import SpeakerWrapper from "@/features/speakers/components/speaker-wrapper";
-import { TracksSection } from "@/features/tracks/components/tracks-section";
 import { Suspense } from "react";
+import TracksSection from "@/features/tracks/components/tracks-section";
 import TracksSectionSkeleton from "@/features/tracks/components/tracks-section-skeleton";
+import SpeakersSection from "@/features/speakers/components/speakers-section";
+import SpeakersSectionSkeleton from "@/features/speakers/components/speakers-section-skeleton";
 
 export default function HomePage() {
   const conferenceDatesLabel = getLabelBetweenTwoIsoStringDates(
     data.conference.startDate,
     data.conference.endDate,
-  );
-
-  const featuredSpeakersWithTheirTalkAndTrack = data.speakers
-    .filter((speaker) => speaker.featured)
-    .map((speaker) => {
-      const talk = data.talks.find((talk) => talk.speakerId === speaker.id)!;
-      const track = data.tracks.find((track) => track.id === talk.trackId)!;
-      return { ...speaker, talk: { ...talk, track } };
-    });
-
-  const tracksWithoutKeynoteOne = data.tracks.filter(
-    (track) => track.name !== "Keynote",
   );
 
   const highlightedTalks = data.talks
@@ -110,24 +97,15 @@ export default function HomePage() {
           </div>
         </article>
       </section>
+
       <Suspense fallback={<TracksSectionSkeleton />}>
         <TracksSection />
       </Suspense>
-      <section className="flex flex-col gap-y-6">
-        <SectionTitle title="// FEATURED_SPEAKERS" />
-        <SpeakerWrapper>
-          {featuredSpeakersWithTheirTalkAndTrack.map((speaker) => {
-            return <Speaker key={speaker.id} {...speaker} />;
-          })}
-        </SpeakerWrapper>
-        <Button
-          as="link"
-          href="/speakers"
-          variant="primary"
-          label="View all speakers"
-          className="mx-auto w-fit"
-        />
-      </section>
+
+      <Suspense fallback={<SpeakersSectionSkeleton />}>
+        <SpeakersSection featuredOnly={true} />
+      </Suspense>
+
       <section className="flex flex-col gap-y-6">
         <SectionTitle title="// SCHEDULE_HIGHLIGHTS" />
         <div className="flex flex-col gap-y-4">

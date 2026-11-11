@@ -255,7 +255,23 @@
                 }
               }
             },
-            "relations": {},
+            "relations": {
+              "talk": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "speakerId"
+                  ]
+                },
+                "to": {
+                  "model": "Talk",
+                  "namespace": "public"
+                }
+              }
+            },
             "storage": {
               "fields": {
                 "avatar": {

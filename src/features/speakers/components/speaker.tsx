@@ -4,15 +4,9 @@ import Separator from "@/shared/components/separator";
 import SpeakerModal from "@/features/speakers/components/speaker-modal";
 import Image from "next/image";
 import { useState } from "react";
-import type { Speaker } from "@/features/speakers/types";
-import type { Talk } from "@/features/talks/types";
-import type { Track } from "@/features/tracks/types";
+import type { SpeakerWithRelations } from "@/features/speakers/types";
 
-interface Props extends Speaker {
-  talk: Talk & { track: Track };
-}
-
-export default function Speaker(props: Props) {
+export default function Speaker(props: SpeakerWithRelations) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -22,7 +16,7 @@ export default function Speaker(props: Props) {
         onClick={() => setIsModalOpen(true)}
       >
         <span
-          style={{ backgroundColor: props.talk.track.color }}
+          style={{ backgroundColor: props.talk[0].track.color }}
           className="relative flex justify-center"
         >
           <Image
@@ -52,7 +46,7 @@ export default function Speaker(props: Props) {
           </span>
           <Separator />
           <span className="text-preset-6 font-medium text-green-200 uppercase">
-            {props.talk.title}
+            {props.talk[0].title}
           </span>
         </span>
       </button>
