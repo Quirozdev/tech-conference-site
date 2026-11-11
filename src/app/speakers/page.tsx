@@ -15,7 +15,11 @@ export default function SpeakersPage() {
       <PageTitle title="// speakers" />
       <Separator />
 
-      <Suspense fallback={<SpeakersSectionSkeleton skeletonsCount={20} />}>
+      <Suspense
+        fallback={
+          <SpeakersSectionSkeleton featuredOnly={false} skeletonsCount={20} />
+        }
+      >
         <SpeakersSection featuredOnly={false} />
       </Suspense>
     </div>
