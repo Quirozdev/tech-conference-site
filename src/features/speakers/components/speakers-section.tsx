@@ -3,6 +3,7 @@ import { getSpeakers } from "@/features/speakers/services/get-speakers";
 import Button from "@/shared/components/button";
 import SectionTitle from "@/shared/components/section-title";
 import Speaker from "@/features/speakers/components/speaker";
+import SpeakersSectionEmpty from "@/features/speakers/components/speakers-section-empty";
 
 interface Props {
   featuredOnly: boolean;
@@ -14,11 +15,15 @@ export default async function SpeakersSection({ featuredOnly }: Props) {
   return (
     <section className="flex flex-col gap-y-6">
       <SectionTitle title="// FEATURED_SPEAKERS" />
-      <SpeakerWrapper>
-        {speakers.map((speaker) => {
-          return <Speaker key={speaker.id} {...speaker} />;
-        })}
-      </SpeakerWrapper>
+      {speakers.length > 0 ? (
+        <SpeakerWrapper>
+          {speakers.map((speaker) => {
+            return <Speaker key={speaker.id} {...speaker} />;
+          })}
+        </SpeakerWrapper>
+      ) : (
+        <SpeakersSectionEmpty />
+      )}
       {featuredOnly && (
         <Button
           as="link"
