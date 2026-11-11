@@ -336,7 +336,8 @@ export namespace Models {
     id: FieldOutputTypes['public']['Speaker']['id'];
     name: FieldOutputTypes['public']['Speaker']['name'];
     role: FieldOutputTypes['public']['Speaker']['role'];
-    readonly [RelationKeys]?: never;
+    talk: public_Talk[];
+    readonly [RelationKeys]?: 'talk';
   };
   export type public_Talk = {
     conferenceId: FieldOutputTypes['public']['Talk']['conferenceId'];
@@ -904,7 +905,16 @@ type ContractBase = Omit<
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
             };
-            readonly relations: Record<string, never>;
+            readonly relations: {
+              readonly talk: {
+                readonly to: { readonly namespace: 'public' & NamespaceId; readonly model: 'Talk' };
+                readonly cardinality: '1:N';
+                readonly on: {
+                  readonly localFields: readonly ['id'];
+                  readonly targetFields: readonly ['speakerId'];
+                };
+              };
+            };
             readonly storage: {
               readonly table: 'Speaker';
               readonly namespaceId: 'public';

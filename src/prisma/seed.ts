@@ -1,4 +1,4 @@
-import { db } from "@/prisma/db";
+import { db, pool } from "@/prisma/db";
 import { seedData } from "@/prisma/seed-data";
 
 async function seed() {
@@ -11,6 +11,7 @@ async function seed() {
     await seedTalks(conference.id);
   } finally {
     await db.close();
+    await pool.end();
     console.log("-------END OF SEED-------");
   }
 }

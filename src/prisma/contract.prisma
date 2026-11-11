@@ -36,6 +36,7 @@ model Speaker {
   avatar   String
   bio      String
   featured Boolean
+  talk     Talk[]
 }
 
 model Talk {

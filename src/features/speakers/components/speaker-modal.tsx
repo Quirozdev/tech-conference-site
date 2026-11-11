@@ -2,18 +2,14 @@ import SectionTitle from "@/shared/components/section-title";
 import Separator from "@/shared/components/separator";
 import SmallButton from "@/shared/components/small-button";
 import { useRemoveVerticalScrolling } from "@/shared/hooks/use-remove-vertical-scrolling";
-import Schedule from "@/features/schedule/components/schedule";
+import Schedule from "@/features/talks/components/schedule";
 import Image from "next/image";
 import { useEffect, useId, useRef } from "react";
-import type { Speaker } from "@/features/speakers/types";
-import type { Talk } from "@/features/talks/types";
-import type { Track } from "@/features/tracks/types";
+import type { SpeakerWithRelations } from "@/features/speakers/types";
 
-interface Props extends Speaker {
+interface Props extends SpeakerWithRelations {
   isOpen: boolean;
   onClose: () => void;
-  id: string;
-  talk: Talk & { track: Track };
 }
 
 export default function SpeakerModal(props: Props) {
@@ -55,7 +51,7 @@ export default function SpeakerModal(props: Props) {
         <div className="flex flex-col gap-4 md:flex-row md:items-center">
           <div className="flex items-start justify-between">
             <div
-              style={{ backgroundColor: props.talk.track.color }}
+              style={{ backgroundColor: props.talk[0].track.color }}
               className="relative flex justify-center"
             >
               <Image
@@ -106,16 +102,18 @@ export default function SpeakerModal(props: Props) {
         <SectionTitle title="// TALK" />
         <Schedule
           includeDetailsSection={false}
-          id={props.talk.id}
-          title={props.talk.title}
-          day={props.talk.day}
-          startTime={props.talk.startTime}
-          endTime={props.talk.endTime}
-          location={props.talk.location}
-          description={props.talk.description}
-          highlighted={props.talk.highlighted}
-          speakerId={props.talk.speakerId}
-          trackId={props.talk.trackId}
+          includeBookmark={true}
+          id={props.talk[0].id}
+          title={props.talk[0].title}
+          day={props.talk[0].day}
+          startTime={props.talk[0].startTime}
+          endTime={props.talk[0].endTime}
+          location={props.talk[0].location}
+          description={props.talk[0].description}
+          highlighted={props.talk[0].highlighted}
+          speakerId={props.talk[0].speakerId}
+          trackId={props.talk[0].trackId}
+          conferenceId={props.talk[0].conferenceId}
           speaker={{
             id: props.id,
             name: props.name,
@@ -126,7 +124,7 @@ export default function SpeakerModal(props: Props) {
             featured: props.featured,
           }}
           track={{
-            ...props.talk.track,
+            ...props.talk[0].track,
           }}
         />
       </dialog>
