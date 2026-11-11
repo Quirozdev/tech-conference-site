@@ -51,3 +51,7 @@ export function getLabelBetweenTwoIsoStringDates(
 
   return `${monthLabel} ${dayLabel}, ${yearLabel}`;
 }
+
+export function formatTimeString(timeString: string) {
+  return timeString.split(":").slice(0, 2).join(":");
+}

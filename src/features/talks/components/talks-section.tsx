@@ -6,9 +6,13 @@ import SectionTitle from "@/shared/components/section-title";
 
 interface Props {
   highlightedOnly: boolean;
+  includeBookmark: boolean;
 }
 
-export default async function TalksSection({ highlightedOnly }: Props) {
+export default async function TalksSection({
+  highlightedOnly,
+  includeBookmark,
+}: Props) {
   const conference = await getConference();
   const talks = await getTalks(conference?.id, highlightedOnly);
 
@@ -18,7 +22,12 @@ export default async function TalksSection({ highlightedOnly }: Props) {
       <div className="flex flex-col gap-y-4">
         {talks.map((talk) => {
           return (
-            <Schedule key={talk.id} includeDetailsSection={true} {...talk} />
+            <Schedule
+              key={talk.id}
+              includeDetailsSection={true}
+              includeBookmark={includeBookmark}
+              {...talk}
+            />
           );
         })}
       </div>

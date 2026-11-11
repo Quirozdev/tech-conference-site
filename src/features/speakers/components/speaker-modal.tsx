@@ -102,6 +102,7 @@ export default function SpeakerModal(props: Props) {
         <SectionTitle title="// TALK" />
         <Schedule
           includeDetailsSection={false}
+          includeBookmark={true}
           id={props.talk[0].id}
           title={props.talk[0].title}
           day={props.talk[0].day}

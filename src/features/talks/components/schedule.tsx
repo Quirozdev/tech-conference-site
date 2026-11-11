@@ -4,11 +4,13 @@ import BookmarkButton from "@/features/talks/components/bookmark-button";
 import { TalkWithRelations } from "@/features/talks/types";
 import Separator from "@/shared/components/separator";
 import { cn } from "@/shared/utils/cn";
+import { formatTimeString } from "@/shared/utils/dates";
 import Image from "next/image";
 import { useState } from "react";
 
 interface Props extends TalkWithRelations {
   includeDetailsSection: boolean;
+  includeBookmark: boolean;
 }
 
 export default function Schedule(props: Props) {
@@ -61,31 +63,33 @@ export default function Schedule(props: Props) {
               </div>
             </div>
           </div>
-          <button
-            aria-pressed={isDetailsShown}
-            className="flex w-fit cursor-pointer items-center uppercase"
-            onClick={() => setIsDetailsShown((prev) => !prev)}
-          >
-            {isDetailsShown ? (
-              <Image
-                src="/images/icon-minus.svg"
-                width={16}
-                height={16}
-                alt=""
-              />
-            ) : (
-              <Image
-                src="/images/icon-plus.svg"
-                width={16}
-                height={16}
-                alt=""
-              />
-            )}
+          {props.includeDetailsSection && (
+            <button
+              aria-pressed={isDetailsShown}
+              className="flex w-fit cursor-pointer items-center uppercase"
+              onClick={() => setIsDetailsShown((prev) => !prev)}
+            >
+              {isDetailsShown ? (
+                <Image
+                  src="/images/icon-minus.svg"
+                  width={16}
+                  height={16}
+                  alt=""
+                />
+              ) : (
+                <Image
+                  src="/images/icon-plus.svg"
+                  width={16}
+                  height={16}
+                  alt=""
+                />
+              )}
 
-            <span className="text-preset-7 text-neutral-600">
-              {isDetailsShown ? "Hide details" : "Show details"}
-            </span>
-          </button>
+              <span className="text-preset-7 text-neutral-600">
+                {isDetailsShown ? "Hide details" : "Show details"}
+              </span>
+            </button>
+          )}
         </div>
         <div
           className="flex items-center gap-2 border-t border-dashed border-neutral-900 px-4 py-2 md:flex-col md:border-t-0 md:border-l"
@@ -93,9 +97,11 @@ export default function Schedule(props: Props) {
         >
           <div className="flex flex-col items-center text-center">
             <p className="text-preset-4 font-chakra-petch text-neutral-900">
-              {props.startTime}
+              {formatTimeString(props.startTime)}
             </p>
-            <p className="text-preset-7 text-neutral-900">{props.endTime}</p>
+            <p className="text-preset-7 text-neutral-900">
+              {formatTimeString(props.endTime)}
+            </p>
           </div>
           <div className="flex flex-1 items-center justify-center">
             <Image
@@ -105,7 +111,14 @@ export default function Schedule(props: Props) {
               alt="Barcode"
             />
           </div>
-          <BookmarkButton />
+
+          {props.includeBookmark ? (
+            <BookmarkButton />
+          ) : (
+            <p className="text-preset-7 text-neutral-900 uppercase">
+              Day {props.day}
+            </p>
+          )}
         </div>
       </div>
     </div>

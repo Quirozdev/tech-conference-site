@@ -51,7 +51,12 @@ export default function SchedulePage() {
       <div className="flex flex-col gap-y-4">
         {talks.map((talk) => {
           return (
-            <Schedule includeDetailsSection={true} key={talk.id} {...talk} />
+            <Schedule
+              key={talk.id}
+              includeDetailsSection={true}
+              includeBookmark={true}
+              {...talk}
+            />
           );
         })}
       </div>

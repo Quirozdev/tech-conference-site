@@ -97,7 +97,7 @@ export default function HomePage() {
       </Suspense>
 
       <Suspense fallback={<TalksSectionSkeleton highlightedOnly={true} />}>
-        <TalksSection highlightedOnly={true} />
+        <TalksSection highlightedOnly={true} includeBookmark={false} />
       </Suspense>
     </div>
   );
