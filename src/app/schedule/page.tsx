@@ -10,6 +10,7 @@ import TalksDaysFilterWrapper from "@/features/talks/components/talks-days-filte
 import TalksDaysFilterWrapperSkeleton from "@/features/talks/components/talks-days-filter-wrapper-skeleton";
 import ScheduleTalksSection from "@/features/talks/components/schedule-talks-section";
 import MyScheduleTalksFilter from "@/features/talks/components/my-schedule-talks-filter";
+import ClearTalksFilters from "@/features/talks/components/clear-talks-filters";
 
 export const metadata: Metadata = {
   title: "Schedule",
@@ -43,7 +44,7 @@ export default function SchedulePage({ searchParams }: Props) {
           <MyScheduleTalksFilter />
         </Suspense>
 
-        <ClearControlButton>Clear</ClearControlButton>
+        <ClearTalksFilters />
       </div>
 
       <Suspense
