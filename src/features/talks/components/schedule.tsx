@@ -113,7 +113,7 @@ export default function Schedule(props: Props) {
           </div>
 
           {props.includeBookmark ? (
-            <BookmarkButton />
+            <BookmarkButton talkId={props.id} />
           ) : (
             <p className="text-preset-7 text-neutral-900 uppercase">
               Day {props.day}
