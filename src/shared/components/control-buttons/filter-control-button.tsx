@@ -4,7 +4,11 @@ interface Props extends React.ComponentPropsWithRef<"button"> {
   isSelected: boolean;
 }
 
-export default function FilterControlButton({ isSelected, children }: Props) {
+export default function FilterControlButton({
+  isSelected,
+  children,
+  ...props
+}: Props) {
   return (
     <button
       type="button"
@@ -17,6 +21,7 @@ export default function FilterControlButton({ isSelected, children }: Props) {
             !isSelected,
         },
       )}
+      {...props}
     >
       {children}
     </button>
