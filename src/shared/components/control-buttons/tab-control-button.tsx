@@ -4,7 +4,11 @@ interface Props extends React.ComponentPropsWithRef<"button"> {
   isSelected: boolean;
 }
 
-export default function TabControlButton({ isSelected, children }: Props) {
+export default function TabControlButton({
+  isSelected,
+  children,
+  ...props
+}: Props) {
   return (
     <button
       type="button"
@@ -18,6 +22,7 @@ export default function TabControlButton({ isSelected, children }: Props) {
             !isSelected,
         },
       )}
+      {...props}
     >
       {children}
     </button>
