@@ -1,19 +1,30 @@
 "use client";
 
+import { useBookmarkStore } from "@/features/talks/stores/bookmark-store";
+import { Talk } from "@/features/talks/types";
 import Image from "next/image";
-import { useState } from "react";
 
-export default function BookmarkButton() {
-  const [isBookmarked, setIsBookmarked] = useState(false);
+interface Props {
+  talkId: Talk["id"];
+}
+
+export default function BookmarkButton({ talkId }: Props) {
+  const isAlreadyBookmarked = useBookmarkStore((state) =>
+    state.bookmarkedTalks.includes(talkId),
+  );
+
+  const toggleBookmarkedTalk = useBookmarkStore(
+    (state) => state.toggleBookmark,
+  );
 
   return (
     <button
       className="flex size-8 cursor-pointer items-center justify-center rounded-full border border-neutral-900 bg-neutral-900 text-center outline-none hover:border-neutral-800 hover:bg-neutral-800 focus:border-dashed focus:border-green-200 focus:bg-neutral-900"
-      aria-pressed={isBookmarked}
-      aria-label={isBookmarked ? "Remove bookmark" : "Add bookmark"}
-      onClick={() => setIsBookmarked((prev) => !prev)}
+      aria-pressed={isAlreadyBookmarked}
+      aria-label={isAlreadyBookmarked ? "Remove bookmark" : "Add bookmark"}
+      onClick={() => toggleBookmarkedTalk(talkId)}
     >
-      {isBookmarked ? (
+      {isAlreadyBookmarked ? (
         <Image
           src="/images/icon-star-filled.svg"
           width={17}

@@ -3,6 +3,7 @@ import { Chakra_Petch, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/shared/components/header/header";
 import Footer from "@/shared/components/footer/footer";
+import BookmarkHydration from "@/features/talks/components/bookmark-hydration";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main className="py-8 md:py-10 xl:pb-16">{children}</main>
         <Footer />
+        <BookmarkHydration />
       </body>
     </html>
   );

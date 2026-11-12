@@ -10,12 +10,18 @@ interface Props {
   highlightedOnly: boolean;
   includeBookmark: boolean;
   title?: string;
+  days?: number[];
+  trackIds?: string[];
+  talkIds?: string[];
 }
 
 export default async function TalksSection({
   highlightedOnly,
   includeBookmark,
   title,
+  days,
+  trackIds,
+  talkIds,
 }: Props) {
   const conference = await getConference();
 
@@ -23,7 +29,13 @@ export default async function TalksSection({
     return <ConferenceEmpty />;
   }
 
-  const talks = await getTalks(conference?.id, highlightedOnly);
+  const talks = await getTalks(
+    conference?.id,
+    highlightedOnly,
+    days,
+    trackIds,
+    talkIds,
+  );
 
   return (
     <section className="flex flex-col gap-y-6">
