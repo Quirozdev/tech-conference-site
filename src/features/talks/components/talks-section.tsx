@@ -12,6 +12,7 @@ interface Props {
   title?: string;
   days?: number[];
   trackIds?: string[];
+  talkIds?: string[];
 }
 
 export default async function TalksSection({
@@ -20,6 +21,7 @@ export default async function TalksSection({
   title,
   days,
   trackIds,
+  talkIds,
 }: Props) {
   const conference = await getConference();
 
@@ -27,7 +29,13 @@ export default async function TalksSection({
     return <ConferenceEmpty />;
   }
 
-  const talks = await getTalks(conference?.id, highlightedOnly, days, trackIds);
+  const talks = await getTalks(
+    conference?.id,
+    highlightedOnly,
+    days,
+    trackIds,
+    talkIds,
+  );
 
   return (
     <section className="flex flex-col gap-y-6">

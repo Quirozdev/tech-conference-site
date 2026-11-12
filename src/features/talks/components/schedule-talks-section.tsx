@@ -4,6 +4,7 @@ interface Props {
   searchParams: Promise<{
     day?: string | string[];
     trackId?: string | string[];
+    talkId?: string | string[];
   }>;
 }
 
@@ -22,12 +23,19 @@ export default async function ScheduleTalksSection({ searchParams }: Props) {
       : [params.trackId]
     : [];
 
+  const talkIds = params.talkId
+    ? Array.isArray(params.talkId)
+      ? params.talkId
+      : [params.talkId]
+    : [];
+
   return (
     <TalksSection
       includeBookmark={true}
       highlightedOnly={false}
       days={days.map(Number)}
       trackIds={trackIds}
+      talkIds={talkIds}
     />
   );
 }

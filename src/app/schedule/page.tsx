@@ -1,5 +1,4 @@
 import ClearControlButton from "@/shared/components/control-buttons/clear-control-button";
-import ToggleControlButton from "@/shared/components/control-buttons/toggle-control-button";
 import TalksSectionSkeleton from "@/features/talks/components/talks-section-skeleton";
 import PageTitle from "@/shared/components/page-title";
 import Separator from "@/shared/components/separator";
@@ -10,6 +9,7 @@ import TracksFilterSkeleton from "@/features/tracks/components/tracks-filter-wra
 import TalksDaysFilterWrapper from "@/features/talks/components/talks-days-filter-wrapper";
 import TalksDaysFilterWrapperSkeleton from "@/features/talks/components/talks-days-filter-wrapper-skeleton";
 import ScheduleTalksSection from "@/features/talks/components/schedule-talks-section";
+import MyScheduleTalksFilter from "@/features/talks/components/my-schedule-talks-filter";
 
 export const metadata: Metadata = {
   title: "Schedule",
@@ -17,8 +17,9 @@ export const metadata: Metadata = {
 
 interface Props {
   searchParams: Promise<{
-    day?: string;
-    trackId?: string;
+    day?: string | string[];
+    trackId?: string | string[];
+    talkId?: string | string[];
   }>;
 }
 
@@ -38,9 +39,10 @@ export default function SchedulePage({ searchParams }: Props) {
           <TracksFilterWrapper />
         </Suspense>
 
-        <ToggleControlButton isSelected={false}>
-          My Schedule
-        </ToggleControlButton>
+        <Suspense>
+          <MyScheduleTalksFilter />
+        </Suspense>
+
         <ClearControlButton>Clear</ClearControlButton>
       </div>
 
