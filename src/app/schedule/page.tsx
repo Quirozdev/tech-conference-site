@@ -1,6 +1,5 @@
 import ClearControlButton from "@/shared/components/control-buttons/clear-control-button";
 import ToggleControlButton from "@/shared/components/control-buttons/toggle-control-button";
-import TalksSection from "@/features/talks/components/talks-section";
 import TalksSectionSkeleton from "@/features/talks/components/talks-section-skeleton";
 import PageTitle from "@/shared/components/page-title";
 import Separator from "@/shared/components/separator";
@@ -10,12 +9,20 @@ import TracksFilterWrapper from "@/features/tracks/components/tracks-filter-wrap
 import TracksFilterSkeleton from "@/features/tracks/components/tracks-filter-wrapper-skeleton";
 import TalksDaysFilterWrapper from "@/features/talks/components/talks-days-filter-wrapper";
 import TalksDaysFilterWrapperSkeleton from "@/features/talks/components/talks-days-filter-wrapper-skeleton";
+import ScheduleTalksSection from "@/features/talks/components/schedule-talks-section";
 
 export const metadata: Metadata = {
   title: "Schedule",
 };
 
-export default function SchedulePage() {
+interface Props {
+  searchParams: Promise<{
+    day?: string;
+    trackId?: string;
+  }>;
+}
+
+export default function SchedulePage({ searchParams }: Props) {
   return (
     <div className="flex flex-col gap-y-6">
       <PageTitle title="// schedule" />
@@ -37,8 +44,12 @@ export default function SchedulePage() {
         <ClearControlButton>Clear</ClearControlButton>
       </div>
 
-      <Suspense fallback={<TalksSectionSkeleton highlightedOnly={true} />}>
-        <TalksSection highlightedOnly={false} includeBookmark={true} />
+      <Suspense
+        fallback={
+          <TalksSectionSkeleton highlightedOnly={false} skeletonsCount={20} />
+        }
+      >
+        <ScheduleTalksSection searchParams={searchParams} />
       </Suspense>
     </div>
   );
