@@ -15,7 +15,7 @@ export default async function FooterTracks() {
             return (
               <FooterLink
                 key={track.id}
-                href={`/schedule?track=${track.id}`}
+                href={`/schedule?trackId=${track.id}`}
                 label={track.name}
               />
             );
