@@ -33,7 +33,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="mx-auto flex min-h-screen max-w-360 flex-col bg-neutral-900 px-4 md:px-5 xl:px-10">
         <Header />
-        <main className="py-8 md:py-10 xl:pb-16">{children}</main>
+        <main className="flex flex-1 flex-col py-8 md:py-10 xl:pb-16">
+          {children}
+        </main>
         <Footer />
         <BookmarkHydration />
       </body>
