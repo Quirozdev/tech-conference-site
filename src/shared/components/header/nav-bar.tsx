@@ -2,6 +2,7 @@
 
 import Menu from "@/shared/components/header/menu";
 import NavList from "@/shared/components/header/nav-list";
+import { useInertBackground } from "@/shared/hooks/use-inert-background";
 import { useKeyDown } from "@/shared/hooks/use-key-down";
 import { useRemoveVerticalScrolling } from "@/shared/hooks/use-remove-vertical-scrolling";
 import { cn } from "@/shared/utils/cn";
@@ -18,6 +19,8 @@ export default function NavBar() {
   }, []);
 
   useRemoveVerticalScrolling({ shouldRemove: isMobileMenuOpen });
+
+  useInertBackground({ shouldBeInert: isMobileMenuOpen });
 
   useKeyDown({
     key: "Escape",
@@ -51,7 +54,7 @@ export default function NavBar() {
         aria-label="Mobile navigation"
         inert={!isMobileMenuOpen}
         className={cn(
-          "absolute top-[calc(100%+1px)] left-0 z-50 w-full bg-neutral-900 py-3 opacity-0 transition-opacity duration-500 ease-in-out md:hidden",
+          "absolute top-[calc(100%+1px)] -right-4 -left-4 z-50 bg-neutral-900 px-4 py-3 opacity-0 transition-opacity duration-500 ease-in-out md:hidden",
           isMobileMenuOpen && "z-50 min-h-dvh opacity-100",
         )}
       >
