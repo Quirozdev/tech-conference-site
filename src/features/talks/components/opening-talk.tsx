@@ -62,7 +62,7 @@ export default function OpeningTalk({ talk, conference }: Props) {
           </div>
           <Button
             as="link"
-            href={`/schedule?talk=${talk.id}`}
+            href={`/schedule?talkId=${talk.id}`}
             label="View Talk"
             variant="secondary"
             className="md:w-fit"

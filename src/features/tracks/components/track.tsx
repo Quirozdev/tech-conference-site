@@ -19,7 +19,7 @@ export default function Track({ id, name, description, color }: Props) {
 
   return (
     <Link
-      href={`/schedule?track=${id}`}
+      href={`/schedule?trackId=${id}`}
       className="flex flex-col gap-y-1.5 border border-neutral-100 bg-neutral-900 px-5 py-4 shadow-[2px_2px_0_0_var(--color-neutral-100)] outline-none hover:border-green-200 hover:shadow-[2px_2px_0_0_var(--color-green-200)] focus:border-dashed focus:border-green-200 focus:shadow-[2px_2px_0_0_var(--color-green-200)]"
     >
       <p
