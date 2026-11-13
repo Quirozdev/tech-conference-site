@@ -14,7 +14,7 @@ export default function SpeakersSectionSkeleton({
 }: Props) {
   return (
     <section className="flex flex-col gap-y-6">
-      <SectionTitle title="// FEATURED_SPEAKERS" />
+      {featuredOnly && <SectionTitle title="// FEATURED_SPEAKERS" />}
       <SpeakerWrapper>
         {Array.from({ length: skeletonsCount }, (_, index) => {
           return <Skeleton key={index} className="h-103 xl:h-108.25" />;

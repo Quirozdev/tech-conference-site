@@ -13,7 +13,7 @@ export default function TalksSectionSkeleton({
 }: Props) {
   return (
     <section className="flex flex-col gap-y-6">
-      <SectionTitle title="// SCHEDULE_HIGHLIGHTS" />
+      {highlightedOnly && <SectionTitle title="// SCHEDULE_HIGHLIGHTS" />}
       <div className="flex flex-col gap-y-4">
         {Array.from({ length: skeletonsCount }).map((_, index) => {
           return (
