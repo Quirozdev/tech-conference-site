@@ -20,6 +20,7 @@ interface Props {
     day?: string;
     trackId?: string | string[];
     talkId?: string | string[];
+    mySchedule?: string;
   }>;
 }
 

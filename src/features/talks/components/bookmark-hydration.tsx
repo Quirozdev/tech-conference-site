@@ -5,7 +5,9 @@ import { useEffect } from "react";
 
 export default function BookmarkHydration() {
   useEffect(() => {
-    useBookmarkStore.persist.rehydrate();
+    if (!useBookmarkStore.persist.hasHydrated()) {
+      useBookmarkStore.persist.rehydrate();
+    }
   }, []);
 
   return null;

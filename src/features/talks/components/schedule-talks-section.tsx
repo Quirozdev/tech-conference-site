@@ -6,6 +6,7 @@ interface Props {
     day?: string;
     trackId?: string | string[];
     talkId?: string | string[];
+    mySchedule?: string;
   }>;
 }
 
@@ -24,7 +25,9 @@ export default async function ScheduleTalksSection({ searchParams }: Props) {
     ? Array.isArray(params.talkId)
       ? params.talkId
       : [params.talkId]
-    : [];
+    : params.mySchedule === "true"
+      ? []
+      : undefined;
 
   return (
     <TalksSection

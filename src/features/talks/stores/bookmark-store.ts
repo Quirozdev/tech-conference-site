@@ -4,6 +4,8 @@ import { createJSONStorage, persist } from "zustand/middleware";
 interface BookmarkStore {
   bookmarkedTalks: string[];
   toggleBookmark: (talkId: string) => void;
+  hasHydrated: boolean;
+  setHasHydrated: () => void;
 }
 
 export const useBookmarkStore = create<BookmarkStore>()(
@@ -16,11 +18,19 @@ export const useBookmarkStore = create<BookmarkStore>()(
             ? state.bookmarkedTalks.filter((id) => id !== talkId)
             : [...state.bookmarkedTalks, talkId],
         })),
+      hasHydrated: false,
+      setHasHydrated: () => set({ hasHydrated: true }),
     }),
     {
       name: "talk-bookmarks",
       storage: createJSONStorage(() => localStorage),
       skipHydration: true,
+      partialize: (state) => ({
+        bookmarkedTalks: state.bookmarkedTalks,
+      }),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated();
+      },
     },
   ),
 );
