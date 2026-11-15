@@ -4,7 +4,7 @@ import { all } from "@prisma/orm-postgres/orm-client";
 export async function getTalks(
   conferenceId: string,
   highlightedOnly: boolean,
-  days?: number[],
+  day?: number,
   trackIds?: string[],
   talkIds?: string[],
 ) {
@@ -14,7 +14,7 @@ export async function getTalks(
     .include("track")
     .where({ conferenceId })
     .where((talk) => (highlightedOnly ? talk.highlighted.eq(true) : all()))
-    .where((talk) => (days && days?.length > 0 ? talk.day.in(days) : all()))
+    .where((talk) => (day ? talk.day.eq(day) : all()))
     .where((talk) =>
       trackIds && trackIds?.length > 0 ? talk.trackId.in(trackIds) : all(),
     )

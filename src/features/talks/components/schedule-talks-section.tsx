@@ -2,7 +2,7 @@ import TalksSection from "@/features/talks/components/talks-section";
 
 interface Props {
   searchParams: Promise<{
-    day?: string | string[];
+    day?: string;
     trackId?: string | string[];
     talkId?: string | string[];
   }>;
@@ -11,11 +11,7 @@ interface Props {
 export default async function ScheduleTalksSection({ searchParams }: Props) {
   const params = await searchParams;
 
-  const days = params.day
-    ? Array.isArray(params.day)
-      ? params.day
-      : [params.day]
-    : [];
+  const day = params.day ? Number(params.day) : undefined;
 
   const trackIds = params.trackId
     ? Array.isArray(params.trackId)
@@ -33,7 +29,7 @@ export default async function ScheduleTalksSection({ searchParams }: Props) {
     <TalksSection
       includeBookmark={true}
       highlightedOnly={false}
-      days={days.map(Number)}
+      day={day}
       trackIds={trackIds}
       talkIds={talkIds}
     />

@@ -10,7 +10,7 @@ interface Props {
   highlightedOnly: boolean;
   includeBookmark: boolean;
   title?: string;
-  days?: number[];
+  day?: number;
   trackIds?: string[];
   talkIds?: string[];
 }
@@ -19,7 +19,7 @@ export default async function TalksSection({
   highlightedOnly,
   includeBookmark,
   title,
-  days,
+  day,
   trackIds,
   talkIds,
 }: Props) {
@@ -32,7 +32,7 @@ export default async function TalksSection({
   const talks = await getTalks(
     conference?.id,
     highlightedOnly,
-    days,
+    day,
     trackIds,
     talkIds,
   );
