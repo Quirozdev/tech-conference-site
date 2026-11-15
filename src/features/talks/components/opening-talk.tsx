@@ -75,7 +75,7 @@ export default function OpeningTalk({ talk, conference }: Props) {
           width={636}
           height={500}
           alt={`${talk.speaker.name}'s profile picture`}
-          className="absolute top-6 -left-12 z-10 hidden h-full min-w-120 md:block xl:-left-16"
+          className="absolute top-6 -left-12 z-10 hidden h-full min-w-120 object-contain md:block xl:-left-16"
         />
         <div className="absolute -top-14 -right-24 hidden h-46 w-46 rounded-full border-2 border-black/8 md:block xl:hidden"></div>
         <div className="absolute top-8 -right-8 hidden h-31 w-31 rounded-full border-2 border-black/8 md:block xl:hidden"></div>
