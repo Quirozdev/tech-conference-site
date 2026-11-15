@@ -4,7 +4,6 @@ import Button from "@/shared/components/button";
 import { ErrorIcon } from "@/shared/icons/error-icon";
 
 export default function Error({
-  error,
   retry,
 }: {
   error: Error & { digest?: string };

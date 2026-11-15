@@ -1,4 +1,3 @@
-import ClearControlButton from "@/shared/components/control-buttons/clear-control-button";
 import TalksSectionSkeleton from "@/features/talks/components/talks-section-skeleton";
 import PageTitle from "@/shared/components/page-title";
 import Separator from "@/shared/components/separator";

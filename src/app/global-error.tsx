@@ -19,7 +19,6 @@ const chakraPetch = Chakra_Petch({
 });
 
 export default function GlobalError({
-  error,
   retry,
 }: {
   error: unknown;
