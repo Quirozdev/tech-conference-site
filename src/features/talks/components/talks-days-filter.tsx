@@ -2,7 +2,6 @@
 
 import TabControlButton from "@/shared/components/control-buttons/tab-control-button";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useRef } from "react";
 
 interface Props {
   days: number[];
@@ -12,19 +11,14 @@ export default function TalksDaysFilter({ days }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const selectedDay = searchParams.get("day");
-  const hasChangedFilters = useRef(false);
+  const selectedDay = searchParams.get("day") || days[0]?.toString();
 
   function onDayChange(day: string) {
-    hasChangedFilters.current = true;
     const params = new URLSearchParams(searchParams.toString());
 
-    if (selectedDay === day) {
-      params.delete("day");
-    } else {
-      params.delete("day");
-      params.set("day", day);
-    }
+    if (selectedDay === day) return;
+
+    params.set("day", day);
 
     const query = params.toString();
 
@@ -40,6 +34,7 @@ export default function TalksDaysFilter({ days }: Props) {
           <TabControlButton
             key={day}
             isSelected={selectedDay === day.toString()}
+            aria-pressed={selectedDay === day.toString()}
             onClick={() => {
               onDayChange(day.toString());
             }}
