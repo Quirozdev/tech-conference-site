@@ -2,7 +2,7 @@
 
 import TabControlButton from "@/shared/components/control-buttons/tab-control-button";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 interface Props {
   days: number[];
@@ -14,17 +14,6 @@ export default function TalksDaysFilter({ days }: Props) {
   const searchParams = useSearchParams();
   const selectedDay = searchParams.get("day");
   const hasChangedFilters = useRef(false);
-
-  useEffect(() => {
-    if (!selectedDay && !hasChangedFilters.current) {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set("day", days[0]?.toString());
-      const query = params.toString();
-      router.replace(query ? `${pathname}?${query}` : pathname, {
-        scroll: false,
-      });
-    }
-  }, [selectedDay, days, pathname, router, searchParams]);
 
   function onDayChange(day: string) {
     hasChangedFilters.current = true;
