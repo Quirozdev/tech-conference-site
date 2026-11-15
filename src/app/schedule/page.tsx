@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 interface Props {
   searchParams: Promise<{
-    day?: string | string[];
+    day?: string;
     trackId?: string | string[];
     talkId?: string | string[];
   }>;
