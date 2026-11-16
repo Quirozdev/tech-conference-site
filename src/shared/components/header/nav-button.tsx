@@ -15,6 +15,12 @@ export default function NavButton({ href, label, onNavigation }: Props) {
 
   const isActive = pathname === href;
 
+  console.log({
+    pathname,
+    href,
+    isActive,
+  });
+
   return (
     <Link
       href={href}
