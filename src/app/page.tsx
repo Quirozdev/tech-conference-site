@@ -7,6 +7,13 @@ import TalksSection from "@/features/talks/components/talks-section";
 import TalksSectionSkeleton from "@/features/talks/components/talks-section-skeleton";
 import ConferenceHeroSection from "@/features/conference/components/conference-hero-section";
 import ConferenceHeroSectionSkeleton from "@/features/conference/components/conference-hero-section-skeleton";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function HomePage() {
   return (

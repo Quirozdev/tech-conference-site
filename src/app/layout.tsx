@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/shared/components/header/header";
 import Footer from "@/shared/components/footer/footer";
 import BookmarkHydration from "@/features/talks/components/bookmark-hydration";
+import { SITE_URL } from "@/core/config/site";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
@@ -17,12 +18,38 @@ const chakraPetch = Chakra_Petch({
   subsets: ["latin"],
 });
 
+const author = "Luis Daniel Quiroz Osuna";
+const siteName = "DevHorizon 2026";
+
+const description =
+  "Discover DevHorizon 2026, a technology conference featuring developer-focused talks, expert speakers, and tracks covering frontend development, performance, accessibility, and tooling.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    template: "%s | Tech Conference Site",
-    default: "Tech Conference Site",
+    template: `%s | ${siteName}`,
+    default: siteName,
   },
-  description: "Site for tech conferences",
+  description,
+  applicationName: siteName,
+  authors: [
+    {
+      name: author,
+      url: "https://github.com/Quirozdev",
+    },
+  ],
+  creator: author,
+  openGraph: {
+    type: "website",
+    siteName,
+    title: siteName,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteName,
+    description,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

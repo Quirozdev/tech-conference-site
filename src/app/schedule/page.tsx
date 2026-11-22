@@ -13,6 +13,11 @@ import ClearTalksFilters from "@/features/talks/components/clear-talks-filters";
 
 export const metadata: Metadata = {
   title: "Schedule",
+  description:
+    "Explore the DevHorizon 2026 conference schedule. Filter talks by day and track, view session details, and bookmark talks to build your personal conference schedule.",
+  alternates: {
+    canonical: "/schedule",
+  },
 };
 
 interface Props {

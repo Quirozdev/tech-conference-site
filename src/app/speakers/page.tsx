@@ -7,6 +7,11 @@ import SpeakersSection from "@/features/speakers/components/speakers-section";
 
 export const metadata: Metadata = {
   title: "Speakers",
+  description:
+    "Meet the DevHorizon 2026 speakers. Explore their backgrounds, professional experience, companies, and the conference sessions they are presenting.",
+  alternates: {
+    canonical: "/speakers",
+  },
 };
 
 export default function SpeakersPage() {
